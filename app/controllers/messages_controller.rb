@@ -16,6 +16,8 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @message = Message.new(message_params)
+    @message.sender_id = current_user.id
+    ## changed from message.sender to @message.sender?
 
     if @message.save
       render json: @message, status: :created, location: @message
@@ -46,6 +48,6 @@ class MessagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:body)
+      params.require(:message).permit(:body, :recipient_id)
     end
 end
