@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
 
-  # helper_method :current_user
+  
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])

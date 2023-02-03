@@ -14,7 +14,11 @@ Message.destroy_all
     puts "🌱 Seeding data..." 
 
     u1 = User.create(name: 'billy', age: 30, password: 'password', email: 'billy@example.com', location: "nowhere", gender: 'theym')
-    u2 = User.create(name: 'asd', age: 2, password: 'password', email: 'dfff@example.com', location: "aaaa", gender: 'itsaboy')
+    u2 = User.create(name: 'morgan', age: 21, password: 'password', email: 'morgan@example.com', location: "LV", gender: 'itsaboy')
+    u3 = User.create(name: 'jason', age: 25, password: 'password', email: 'jason@example.com', location: "Irvine", gender: 'ladyboy')
+    u4 = User.create(name: 'keith', age: 26, password: 'password', email: 'keith@example.com', location: "Somewhere S CA", gender: 'boylady')
+
+
 
     m1 =Message.create!(
         sender_id: u1.id,

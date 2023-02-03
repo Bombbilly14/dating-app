@@ -1,24 +1,29 @@
 import {useEffect, useState} from 'react'
 import React from 'react'
 
-const ws = new WebSocket("ws://localhost:3000/cable")
 
-function MessagesPage() {
+
+
+function MessagesPage({user, recipientId, matches}) {
   const [messages, setMessages] = useState([])
-  const [guid, setGuid] = useState("")
+  
+
+  const recipient_id = recipientId
+  const sender_id = user.id
+  const channel_name = [recipient_id, sender_id].sort().join("_");
+
+  const ws = new WebSocket(`ws://localhost:3000/cable?recipient_id=${recipient_id}&sender_id=${sender_id}`)
 
   ws.onopen = () => {
 
     console.log('connecting to websocket server')
-    setGuid(Math.random().toString(36).substring(2, 15))
     ws.send(
       JSON.stringify({
         command: "subscribe",
         identifier: JSON.stringify({
           // recipient_id?? 
-          id: guid,
           // "messages_channel_#{recipient_id}"
-          channel: "MessagesChannel"
+          channel: `messages_channel_${channel_name}`,
         })
       })
       )
@@ -54,34 +59,35 @@ function MessagesPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ body }),
+      body: JSON.stringify({  body, recipient_id, sender_id  }),
     });
   };
 
+  
+  
+    return (
+      <div className="App">
+        <div className="messages-header">
+          <h1> messages:</h1>
+          <p>Guid:</p>
+        </div>
+       <div className="messages-body" id="messages">
+        {messages.map((message) => {
+          return <div className="messages" key={message.id}>
+            <p>{user.name}: {message.body}</p>
+             </div>
+        })}
+        </div>
+        <div className="messageForm">
+          <form onSubmit={handleSubmit}>
+            <input className="messageInput" type="text" name="message" />
+            <button className="messageButton" type="submit">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+  export default MessagesPage;
 
-  return (
-    <div className="App">
-      <div className="messages-header">
-        <h1> messages:</h1>
-        <p>Guid: {guid}</p>
-      </div>
-     <div className="messages-body" id="messages">
-      {messages.map((message) => {
-        return <div className="messages" key={message.id}>
-          <p>message: {message.body}</p>
-           </div>
-      })}
-      </div>
-      <div className="messageForm">
-        <form onSubmit={handleSubmit}>
-          <input className="messageInput" type="text" name="message" />
-          <button className="messageButton" type="submit">
-            Send
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-export default MessagesPage;

@@ -1,10 +1,14 @@
 import './styles/App.css';
 import {useEffect, useState} from 'react'
-import MessagesPage from './MessagesPage';
+import { Routes, Route } from "react-router-dom";
+
+import ChatPage from './ChatPage'
+import NavBar from './NavBar'
+import SignInCreatePage from './SignInCreatePage'
 
 function App() {
 //when ready uncomment below
-  const [user, setUser] = useState("")
+  const [me, setMe] = useState("")
     
 
   useEffect(()=> {
@@ -12,9 +16,9 @@ function App() {
     .then(r => r.json())
     .then(data => {
       if(data.error) {
-        setUser(null)
+        setMe(null)
       } else {
-      setUser(data)
+      setMe(data)
       }
     } )
   }, [])
@@ -23,7 +27,15 @@ function App() {
   
  return (
   <div>
-    <MessagesPage user={user} setUser={setUser}/>
+    <NavBar />
+    <Routes >
+    {/* <Route path="/home" element={<Home/>} /> */}
+    {/* <Route path="/profile" element={<MyProfile/>} />  */}
+    {/*  not sure about below path*/}
+    {/* <Route path="/users/:username" element={<ProfilePage />} /> */}
+    <Route path="/messages" element={<ChatPage me={me}/>} />
+    <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe}/>} />
+    </Routes>
   </div>
  )
 }
