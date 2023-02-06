@@ -22,7 +22,7 @@ function SignIn({setUser}) {
       if (!data.error) {
       setUser(data)
       // localStorage.setItem('user','test')
-      navigate("/profile")
+    //   navigate("/profile")
       } else {
         setError(data.error)
       }

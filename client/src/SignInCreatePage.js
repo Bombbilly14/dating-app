@@ -4,7 +4,7 @@ import RegistrationForm from './RegistrationForm'
 import SignIn from "./SignIn.js"
 import Modal from 'react-modal';
 import "./styles/Form.css"
-// import shareVideo from "./styles/share.mp4"
+
 Modal.setAppElement('#root')
 
 function SignInCreatePage({user, setUser}) {

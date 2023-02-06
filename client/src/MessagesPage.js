@@ -6,7 +6,7 @@ import React from 'react'
 
 function MessagesPage({user, recipientId, matches}) {
   const [messages, setMessages] = useState([])
-  
+
 
   const recipient_id = recipientId
   const sender_id = user.id
@@ -17,40 +17,49 @@ function MessagesPage({user, recipientId, matches}) {
   ws.onopen = () => {
 
     console.log('connecting to websocket server')
+    console.log(channel_name)
     ws.send(
       JSON.stringify({
         command: "subscribe",
         identifier: JSON.stringify({
-          // recipient_id?? 
+          // recipient_id??
           // "messages_channel_#{recipient_id}"
           channel: `messages_channel_${channel_name}`,
+
         })
       })
       )
     }
+
     ws.onmessage = (e) => {
       const data = JSON.parse(e.data);
       if (data.type === "ping") return;
       if (data.type === "welcome") return;
       if (data.type === "confirm_subscription") return;
-  
+
       const message = data.message;
       setMessages([...messages, message]);
     };
     const fetchMessages = async () => {
       const response = await fetch('/messages')
       const data = await response.json()
-    
-      setMessages(data)
-  }
 
+      setMessages(data)
+
+  }
+  
   useEffect(() => {
     fetchMessages()
 
+
   }, [])
+
+//   const recipient = matches.find(match => match.id === recipientId);
+//   const recipientName = recipient ? recipient.name : null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const body = e.target.message.value;
     e.target.message.value = "";
 
@@ -63,18 +72,20 @@ function MessagesPage({user, recipientId, matches}) {
     });
   };
 
-  
-  
+  console.log(messages)
+
     return (
       <div className="App">
         <div className="messages-header">
           <h1> messages:</h1>
-          <p>Guid:</p>
         </div>
        <div className="messages-body" id="messages">
         {messages.map((message) => {
+            const recipient = matches.find(match => match.id === recipientId);
+            const recipientName = recipient ? recipient.name : null;
+            const userName = message.sender_id === user.id ? "You" : recipientName
           return <div className="messages" key={message.id}>
-            <p>{user.name}: {message.body}</p>
+            <p>{userName}: {message.body}</p>
              </div>
         })}
         </div>
