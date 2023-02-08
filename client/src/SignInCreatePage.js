@@ -30,7 +30,7 @@ function SignInCreatePage({user, setUser}) {
          <div>
            <div>
            <header>
-       <h2 className="h2-loop">The Loop 🔁</h2>
+       <h2 className="h2-loop">Dating App</h2>
        </header>
            </div>
         <div className="modalParent">

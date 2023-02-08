@@ -9,7 +9,7 @@ export const navData = [
         id: 0,
         icon: <HomeIcon/>,
         text: <span style={{ fontWeight: 'bold'}}>Home</span>,
-        link: "/"
+        link: "/profile"
     },
     {
         id: 1,

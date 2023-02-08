@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     def create
-        user = User.find_by(email: params[:email])
+        user = User.create!(user_params)
         #if user && user.authenticate(params[:password])
           session[:user_id] = user.id
           render json: user, status: :created
@@ -35,10 +35,10 @@ class UsersController < ApplicationController
     private
 
     def find_user
-        user = User.find(params[:id])
+        user = User.find(params[:id])  
     end
 
     def user_params
-        params.permit(:name, :email, :password, :bio, :location, :gender)
+        params.permit(:name, :email, :password, :bio, :location, :gender, :age, :id, :user)
     end
 end

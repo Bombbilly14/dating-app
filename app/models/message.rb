@@ -5,15 +5,10 @@ class Message < ApplicationRecord
     validates :body, presence: true
     after_create_commit { broadcast_message }
 
-
-
-
-
-
-private
+  private
 
     def broadcast_message
-        ActionCable.server.broadcast("messages_channel_#{channel_name}", {
+        ActionCable.server.broadcast("messages_channel#{:channel_name}", {
         message: self.body,
         sender_id: self.sender_id,
         recipient_id: self.recipient_id

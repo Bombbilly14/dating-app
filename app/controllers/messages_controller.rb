@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     @message.sender_id = current_user.id
+    
     ## changed from message.sender to @message.sender?
 
     if @message.save

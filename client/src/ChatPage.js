@@ -18,7 +18,7 @@ function ChatPage({me}) {
 
     const handleUserClick = (id) => {
         setRecipientId(id);
-        console.log(recipientId)
+        console.log(`This is recipients ID: ${recipientId}`)
       };
 
 
