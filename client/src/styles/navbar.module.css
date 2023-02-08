@@ -1,0 +1,53 @@
+.sidenav {
+    width: 210px;
+    transition: width 0.4s ease-in-out;
+    height: fixed;
+    background-color: transparent;
+    padding-top: 28px;
+    position: fixed;
+    z-index: 2;
+}
+.sidenavClosed {
+
+    transition: width 0.2s ease-in-out;
+    width: 60px;
+    z-index: 2;
+    position: fixed;
+    
+}
+
+.sideitem {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.linkText {
+    padding-left: 16px;
+
+}
+.linkTextClosed {
+    
+    visibility: hidden;
+}
+
+.sideitem:hover {
+    background-color: purple;
+
+}
+.menuBtn {
+    align-self: center;
+    align-self: flex-start;  
+    justify-self: flex-end;
+    color: black;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+
