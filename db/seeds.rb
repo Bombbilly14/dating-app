@@ -8,6 +8,7 @@
 
 User.destroy_all
 Message.destroy_all
+Connection.destroy_all
 
 
 
@@ -17,6 +18,15 @@ Message.destroy_all
     u2 = User.create(name: 'morgan', age: 21, password: 'password', email: 'morgan@example.com', location: "LV", gender: 'itsaboy')
     u3 = User.create(name: 'jason', age: 25, password: 'password', email: 'jason@example.com', location: "Irvine", gender: 'ladyboy')
     u4 = User.create(name: 'keith', age: 26, password: 'password', email: 'keith@example.com', location: "Somewhere S CA", gender: 'boylady')
+    u7 = User.create(name: 'Tennifer', age: 26, password: 'password', email: 'keith@example.com', location: "Eagleton", gender: 'F')
+    u8 = User.create(name: 'Barbara', age: 26, password: 'password', email: 'keith@example.com', location: "Somewhere fancy", gender: 'M')
+    u9 = User.create(name: 'Sue', age: 26, password: 'password', email: 'keith@example.com', location: "nowhere S CA", gender: 'F')
+    u5 = User.create(name: 'Ix', age: 26, password: 'password', email: 'keith@example.com', location: "Somewhere", gender: 'Z')
+    u6 = User.create(name: 'keith2', age: 26, password: 'password', email: 'keith@example.com', location: "seeds r hard", gender: 'they/them')
+    u10 = User.create(name: 'keith3', age: 26, password: 'password', email: 'keith@example.com', location: "ok last place", gender: 'fem')
+
+    c1 = Connection.create(accepted: true, sender_id: u1.id, recipient_id: u2.id)
+    c2 = Connection.create(accepted: true, sender_id: u7.id, recipient_id: u4.id)
 
 
 

@@ -32,8 +32,8 @@ function MyProfile({ user , setUser, onUpdateUser}) {
         throw new Error("Failed to update user");
       }
       setUser({...updatedUser})
-      
-      
+
+
     } catch (error) {
       console.log(error);
     }

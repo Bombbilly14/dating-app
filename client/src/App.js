@@ -6,6 +6,7 @@ import ChatPage from './ChatPage'
 import NavBar from './NavBar'
 import SignInCreatePage from './SignInCreatePage'
 import MyProfile from './MyProfile'
+import Home from "./Home"
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     age: "",
     location: "",
   })
-    
+
 
   useEffect(()=> {
     fetch('/me')
@@ -35,12 +36,12 @@ function App() {
   };
 
 
-  
+
  return (
   <div>
     <NavBar />
     <Routes >
-    {/* <Route path="/home" element={<Home/>} /> */}
+    <Route path="/home" element={<Home/>} />
     <Route path="/profile" element={<MyProfile user={me} setUser={setMe}  onUpdateUser={handleUpdateUser}/>} />
     {/*  not sure about below path*/}
     {/* <Route path="/users/:username" element={<ProfilePage />} /> */}
