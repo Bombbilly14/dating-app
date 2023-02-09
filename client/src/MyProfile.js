@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/Profile.css'
 
 
-function MyProfile({ user , setUser, onUpdateUser}) {
+function MyProfile({ user , setUser}) {
   const [editing, setEditing] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState({...user})
+  const [bio, setBio] = useState("")
+  const [location, setLocation] = useState("")
+  const [age, setAge] = useState("")
+  const [avatarData, setAvatarData] = useState(null)
+  
+
 
   const handleEditClick = () => {
     setEditing(true);
@@ -12,40 +17,45 @@ function MyProfile({ user , setUser, onUpdateUser}) {
 
   const handleCancelClick = () => {
     setEditing(false);
-    
+
   };
+  const handleFileChange = (event) => {
+    setAvatarData(event.target.files[0]);
+  }
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setEditing(false);
-  
+
+    const formData =  new FormData()
+    formData.append('bio', bio)
+    formData.append('location', location)
+    formData.append('age', age)
+ 
+    formData.append('avatar[img]', avatarData)
+
+
+
     try {
+     
       const response = await fetch(`/users/${user.id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
+        body: formData
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to update user");
       }
-      setUser({...updatedUser})
-
+      const updatedUser = await response.json();
+      setUser(updatedUser);
 
     } catch (error) {
       console.log(error);
     }
   };
-  
 
-  const handleInputChange = (event) => {
-    setUpdatedUser({
-      ...updatedUser,
-      [event.target.name]: event.target.value,
-    });
-  };
+
 
   return (
     <div className="profile-container">
@@ -59,43 +69,50 @@ function MyProfile({ user , setUser, onUpdateUser}) {
       </div>
       {editing ? (
         <>
-        <form onSubmit={handleSubmit}>
-
-            
-            <label htmlFor="bio">Bio:</label>
-            <textarea
-              id="bio"
-              name="bio"
-              value={updatedUser.bio}
-              onChange={handleInputChange}/>
-            
-         
-            <label htmlFor="location">Location:</label>
-            <input
+          <form onSubmit={handleSubmit}>
+             <label htmlFor="bio"></label>
+           <input
+             id="bio"
+             value={bio}
+             onChange={ e => setBio(e.target.value)}
+             placeholder="Bio"/>
+             <br />
+             <label htmlFor="location"></label>
+             <input
               id="location"
-              name="location"
-              type="text"
-              value={updatedUser.location}
-              onChange={handleInputChange}
-            />
-         
-         
-            <label htmlFor="age">Age:</label>
-            <input
-              id="age"
-              name="age"
+              value={location}
+              onChange={ e => setLocation(e.target.value)}
+              placeholder="Location"/>
+             <br />
+             <label htmlFor="age"></label>
+             <input
               type="number"
-              value={updatedUser.age}
-              onChange={handleInputChange}
-            />
+              id="age"
+              value ={age}
+              onChange={ (e) => setAge(e.target.value)}
+              placeholder="age"
+              />
+            <br />
 
-            <button className="cancel-button" type="button" onClick={handleCancelClick}>
-              Cancel
-            </button>
-            <button type="submit" >
-              Save
-            </button>
-        </form>
+            <label htmlFor="avatar"></label>
+            <input
+            type="file"
+            accept="image/*"
+            id="avatar"
+            onChange={handleFileChange}
+            />
+            <br />
+
+            <div className="button-container">
+              <button className="cancel-button" type="button" onClick={handleCancelClick}>
+                Cancel
+              </button>
+              <button type="submit" >
+                Save
+              </button>
+
+            </div>
+          </form>
         </>
       ) : (
         <div className="profile-info">

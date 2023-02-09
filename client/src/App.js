@@ -27,9 +27,7 @@ function App() {
   }, [])
 
 
-  const handleUpdateUser = updatedUser => {
-    setMe(updatedUser);
-  };
+
 
 
 
@@ -38,11 +36,11 @@ function App() {
     <NavBar />
     <Routes >
     <Route path="/home" element={<Home/>} />
-    <Route path="/profile" element={<MyProfile user={me} setUser={setMe}  onUpdateUser={handleUpdateUser}/>} />
+    <Route path="/profile" element={<MyProfile user={me} setUser={setMe} />} />
     {/*  not sure about below path*/}
     {/* <Route path="/users/:username" element={<ProfilePage />} /> */}
     <Route path="/messages" element={<ChatPage me={me}/>} />
-    <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe}/>} />
+    <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe} />} />
     </Routes>
   </div>
  )
