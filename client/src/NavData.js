@@ -25,7 +25,7 @@ export const navData = [
         link: "/signin"
     },
     {
-        id: 0,
+        id: 3,
         icon: <HomeIcon/>,
         text: <span style={{ fontWeight: 'bold'}}>Home</span>,
         link: "/home"

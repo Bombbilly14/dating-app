@@ -9,13 +9,15 @@ function Home() {
       .then((response) => response.json())
       .then((data) => setAllUsers(data));
   }, []);
+  
 
   return (
     <div className="grid-container">
       {allUsers.map((user) => (
         <div className="grid-item" key={user.id}>
           <div className="user-box">
-            <p className="user-name">{user.name}</p>
+          <p>{user.name}</p>
+          <img src={user.avatar.img} alt={user.name} className="user-name" />
           </div>
         </div>
       ))}
