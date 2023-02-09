@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :avatars
   mount ActionCable.server => '/cable'
   ## ACTION CABLE SERVER
   

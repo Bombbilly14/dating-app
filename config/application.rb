@@ -34,6 +34,10 @@ module ReactRailsApiProjectTemplate
     config.action_cable.disable_request_forgery_protection = true
     config.action_cable.url = "/cable"
 
+
+    # added because ??
+    config.active_storage.variant_processor = :vips
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -11,11 +11,7 @@ import Home from "./Home"
 
 function App() {
 //when ready uncomment below
-  const [me, setMe] = useState({
-    bio: "",
-    age: "",
-    location: "",
-  })
+  const [me, setMe] = useState([])
 
 
   useEffect(()=> {
