@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './styles/Profile.css'
 
 
@@ -32,8 +32,7 @@ function MyProfile({ user , setUser}) {
     formData.append('bio', bio)
     formData.append('location', location)
     formData.append('age', age)
- 
-    formData.append('avatar[img]', avatarData)
+
 
 
 
@@ -55,12 +54,26 @@ function MyProfile({ user , setUser}) {
     }
   };
 
+  const handleFileSubmit = (e) => {
+    e.preventDefault();
+
+    const fileData = new FormData();
+    fileData.append('user_id', user.id)
+    fileData.append('img', avatarData)
+
+    fetch(`/avatars/${user.avatar.id}`, {
+      method: 'PATCH',
+      body: fileData
+    })
+  }
+
 
 
   return (
     <div className="profile-container">
       <div className="profile-header">
         <h1 className="profile-name">{user.name}</h1>
+        
         {!editing && (
           <button className="edit-button" onClick={handleEditClick}>
             Edit
@@ -94,15 +107,6 @@ function MyProfile({ user , setUser}) {
               />
             <br />
 
-            <label htmlFor="avatar"></label>
-            <input
-            type="file"
-            accept="image/*"
-            id="avatar"
-            onChange={handleFileChange}
-            />
-            <br />
-
             <div className="button-container">
               <button className="cancel-button" type="button" onClick={handleCancelClick}>
                 Cancel
@@ -112,6 +116,22 @@ function MyProfile({ user , setUser}) {
               </button>
 
             </div>
+          </form>
+          <form onSubmit={handleFileSubmit}>
+            <label htmlFor="avatar"></label>
+            <input
+            type="file"
+            accept="image/*"
+            id="avatar"
+            onChange={handleFileChange}
+            />
+            <br />
+            <button className="cancel-button" type="button" onClick={handleCancelClick}>
+                Cancel
+              </button>
+              <button type="submit" >
+                Save
+              </button>
           </form>
         </>
       ) : (
@@ -127,6 +147,7 @@ function MyProfile({ user , setUser}) {
           </p>
         </div>
       )}
+      {/* <img src={user.avatar.img} className="user-name" /> */}
     </div>
   );
 }
