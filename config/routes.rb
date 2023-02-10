@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :avatars
   mount ActionCable.server => '/cable'
   ## ACTION CABLE SERVER
   
@@ -7,6 +6,7 @@ Rails.application.routes.draw do
   
   resources :connections
   resources :users
+  resources :avatars
   resources :messages
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
