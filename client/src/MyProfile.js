@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/Profile.css'
 
 
@@ -8,6 +8,7 @@ function MyProfile({ user , setUser}) {
   const [location, setLocation] = useState("")
   const [age, setAge] = useState("")
   const [avatarData, setAvatarData] = useState(null)
+  const [avatar, setAvatar] = useState("")
   
 
 
@@ -56,6 +57,7 @@ function MyProfile({ user , setUser}) {
 
   const handleFileSubmit = (e) => {
     e.preventDefault();
+    setEditing(false);
 
     const fileData = new FormData();
     fileData.append('user_id', user.id)
@@ -65,7 +67,11 @@ function MyProfile({ user , setUser}) {
       method: 'PATCH',
       body: fileData
     })
+    
+
   }
+
+
 
 
 
@@ -147,7 +153,7 @@ function MyProfile({ user , setUser}) {
           </p>
         </div>
       )}
-      {/* <img src={user.avatar.img} className="user-name" /> */}
+      {/* {user ? <img src={user.avatar.img} key={user.id} className="user-name" /> : null} */}
     </div>
   );
 }

@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2023_02_08_221353) do
   end
 
   create_table "connections", force: :cascade do |t|
-    t.boolean "accepted", default: false
+    t.boolean "accepted"
     t.integer "sender_id"
     t.integer "recipient_id"
     t.datetime "created_at", precision: 6, null: false

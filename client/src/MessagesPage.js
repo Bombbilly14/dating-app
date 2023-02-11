@@ -83,7 +83,7 @@ const CableApp = {}
 CableApp.cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 
-function MessagesPage({user, recipientId, matches}) {
+function MessagesPage({user, recipientId, matches, cable}) {
   const [messages, setMessages] = useState([])
 
   
@@ -100,12 +100,12 @@ function MessagesPage({user, recipientId, matches}) {
     setMessages(data)
 
 }
-
+// original below, and below this is test
 useEffect(() => {
     fetchMessages()
     if (user.id && recipientId) {
       setTimeout(() => {
-        const channel = CableApp.cable.subscriptions.create(
+        const channel = cable.subscriptions.create(
           {
             command: "subscribe",
             channel: `MessagesChannel${channel_name}`
@@ -121,7 +121,27 @@ useEffect(() => {
         };
       }, 1000); // wait for 1 second before subscribing to the channel
     }
-  }, [channel_name, user.id, recipientId, messages]);
+  }, [channel_name, user.id, recipientId]);
+
+
+  // useEffect(() => { 
+  //   fetchMessages()   
+  //   if (user.id) {
+  //     cable.subscriptions.create
+  //     (
+  //       {
+  //         channel: 'ChatsChannel',
+  //         user_id: user.id,
+  //         recipient_id: recipientId.id
+  //       },
+  //       {
+  //         received: (message) => {
+  //           setMessages([...messages, message])
+  //         }
+  //       }
+  //     )
+  //   }
+  // }, [user.id, cable.subscriptions, recipientId.id, setMessages, messages])
 
 
 
