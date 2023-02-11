@@ -32,41 +32,7 @@ function Home({me}) {
         console.error(error);
       });
   };
-// const handleClick = (match) => {
-//     let url = "/connections";
-//     let method = "POST";
-//     let connectionData = {
-//       sender_id: me.id,
-//       recipient_id: match.id
-//     };
-//     if (match.connection) {
-//       url = `/connections/${match.connection.id}`;
-//       method = "PUT";
-//       connectionData = {
-//         ...connectionData,
-//         accepted: true
-//       };
-//     }
-//     fetch(url, {
-//       method: method,
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(connectionData)
-//     })
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error("Failed to update connection");
-//         }
-//         return response.json();
-//       })
-//       .then(connection => {
-//         console.log("Connection updated:", connection);
-//       })
-//       .catch(error => {
-//         console.error(error);
-//       });
-//   };
+
 
   useEffect(() => {
     fetch('/users')
