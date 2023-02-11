@@ -29,6 +29,12 @@ export const navData = [
         icon: <HomeIcon/>,
         text: <span style={{ fontWeight: 'bold'}}>Home</span>,
         link: "/home"
+    },
+    {
+        id: 4,
+        icon: <HomeIcon/>,
+        text: <span style={{ fontWeight: 'bold'}}>Matched Users</span>,
+        link: "/matches"
     }
 
 ]
