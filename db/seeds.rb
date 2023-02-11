@@ -30,17 +30,17 @@ Connection.destroy_all
 
 
 
-    m1 =Message.create!(
-        sender_id: u1.id,
-        recipient_id: u2.id,
-        body: "Hello, how are you?"
-      )
+    # m1 =Message.create!(
+    #     sender_id: u1.id,
+    #     recipient_id: u2.id,
+    #     body: "Hello, how are you?"
+    #   )
 
-    m2 =Message.create!(
-        sender_id: u2.id,
-        recipient_id: u1.id,
-        body: "not bad, thanks"
-      )
+    # m2 =Message.create!(
+    #     sender_id: u2.id,
+    #     recipient_id: u1.id,
+    #     body: "not bad, thanks"
+    #   )
      
 
 

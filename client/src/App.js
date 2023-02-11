@@ -7,9 +7,11 @@ import NavBar from './NavBar'
 import SignInCreatePage from './SignInCreatePage'
 import MyProfile from './MyProfile'
 import Home from "./Home"
+// import './styles/index.css';
 
 
-function App() {
+
+function App({cable}) {
 //when ready uncomment below
   const [me, setMe] = useState([])
 
@@ -35,11 +37,11 @@ function App() {
   <div>
     <NavBar />
     <Routes >
-    <Route path="/home" element={<Home/>} />
+    <Route path="/home" element={<Home me={me}/>} />
     <Route path="/profile" element={<MyProfile user={me} setUser={setMe} />} />
     {/*  not sure about below path*/}
     {/* <Route path="/users/:username" element={<ProfilePage />} /> */}
-    <Route path="/messages" element={<ChatPage me={me}/>} />
+    <Route path="/messages" element={<ChatPage me={me} cable={cable}/>} />
     <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe} />} />
     </Routes>
   </div>
