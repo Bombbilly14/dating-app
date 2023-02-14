@@ -9,6 +9,7 @@ import SignInCreatePage from './SignInCreatePage'
 import MyProfile from './MyProfile'
 import Home from "./Home"
 import PrivateRoute from './utils/PrivateRoute.js'
+import './styles/Messaging.css'
 // import './styles/index.css';
 
 
@@ -36,7 +37,7 @@ function App({cable}) {
 
 
  return (
-  <div>
+  <div fluid className="py-5 gradient-custom">
     {me ? <NavBar me={me}/> : null}
     <Routes >
     <Route element={<PrivateRoute user={me} setUser={setMe}/>}>
