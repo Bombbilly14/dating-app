@@ -9,7 +9,7 @@ CableApp.cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 function MessagesPage({user, recipientId, matches}) {
   const [messages, setMessages] = useState([])
-
+console.log(messages)
   
 
 
@@ -28,6 +28,7 @@ function MessagesPage({user, recipientId, matches}) {
 useEffect(() => {
   
     if (user.id && recipientId) {
+      console.log("hi")
       fetchMessages()
       
        const channel =  CableApp.cable.subscriptions.create(
@@ -38,8 +39,8 @@ useEffect(() => {
           },
           {
             received: (data) => {
-              setMessages([...messages, data])
-              console.log(`data: ${JSON.stringify(data)}`)
+              setMessages(messages => [...messages, data])
+             // console.log(`data: ${JSON.stringify(data)}`)
             },
           }
         );
@@ -83,11 +84,11 @@ const handleSubmit = async (e) => {
         </div>
        <div className="messages-body">
         {messages.map((message) => {
-          const recipient = matches.find(match => match.id === recipientId);
+          const recipient = matches.find(match => match.id === recipient_id);
           const recipientName = recipient ? recipient.name : null;
           const userName = message.sender_id === user.id ? "You" : recipientName
-          console.log(message)
-          return <div className="messages" key={message.body}>
+         // console.log(message)
+          return <div className="messages" key={message.id}>
             <p>{userName}: {message.body}</p>
              </div>
         })}
