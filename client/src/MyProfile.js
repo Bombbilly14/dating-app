@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/Profile.css'
 
 
+
 function MyProfile({ user , setUser}) {
   const [editing, setEditing] = useState(false);
   const [bio, setBio] = useState("")

@@ -17,6 +17,7 @@
     "actioncable": "^5.2.8-1",
     "activestorage": "^5.2.8-1",
     "autoprefixer": "^10.4.13",
+    "mdb-react-ui-kit": "^5.1.0",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
     "postcss-composes": "^0.1.0",
