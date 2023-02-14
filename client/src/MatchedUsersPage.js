@@ -6,9 +6,9 @@ const [connections, setUserConnections] = useState([])
         fetch(`/connections?sender_id=${me.id}&accepted=true`)
           .then(response => response.json())
           .then(connections => {
-            // filter connections to only include those where the user is either the sender or recipient
+           
             const userConnections = connections.filter(connection => connection.sender_id === me.id || connection.recipient_id === me.id);
-            // set the filtered connections as state
+            
             setUserConnections(userConnections);
             console.log(userConnections)
           });
