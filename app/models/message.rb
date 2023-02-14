@@ -7,14 +7,15 @@ class Message < ApplicationRecord
 private
 
     def broadcast_message
-        ActionCable.server.broadcast("messages_channel#{:channel_name}", {
-        message: self.body,
+        ActionCable.server.broadcast("chat_#{room}", {
+        body: self.body,
         sender_id: self.sender_id,
         recipient_id: self.recipient_id
+
         })
     end
 
-    def channel_name
+    def room
         [recipient_id, sender_id].sort().join("_")
     end
 end

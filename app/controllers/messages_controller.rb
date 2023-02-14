@@ -3,8 +3,7 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    @messages = Message.all
-
+    @messages = Message.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, params[:recipient_id], params[:recipient_id], current_user.id)
     render json: @messages
   end
 
@@ -18,7 +17,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.sender_id = current_user.id
     
-    ## changed from message.sender to @message.sender?
+    
 
     if @message.save
       render json: @message, status: :created, location: @message

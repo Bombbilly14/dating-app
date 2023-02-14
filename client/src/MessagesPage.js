@@ -18,7 +18,7 @@ function MessagesPage({user, recipientId, matches}) {
   const channel_name = [recipient_id, sender_id].sort().join("_");
 
   const fetchMessages = async () => {
-    const response = await fetch('/messages')
+    const response = await fetch(`/messages?recipient_id=${recipient_id}&sender_id=${sender_id}`)
     const data = await response.json()
 
     setMessages(data)
@@ -26,10 +26,11 @@ function MessagesPage({user, recipientId, matches}) {
 }
 
 useEffect(() => {
-    fetchMessages()
+  
     if (user.id && recipientId) {
+      fetchMessages()
       
-        const channel = CableApp.cable.subscriptions.create(
+       const channel =  CableApp.cable.subscriptions.create(
           {
             command: "subscribe",
             channel: `MessagesChannel`,
@@ -38,6 +39,7 @@ useEffect(() => {
           {
             received: (data) => {
               setMessages([...messages, data])
+              console.log(`data: ${JSON.stringify(data)}`)
             },
           }
         );
@@ -46,7 +48,7 @@ useEffect(() => {
         };
       
     }
-  }, [channel_name, user.id, recipientId, setMessages]);
+  }, [ user, user.id, recipient_id]);
 
 
 
@@ -79,12 +81,13 @@ const handleSubmit = async (e) => {
         <div className="messages-header">
           <h1> messages:</h1>
         </div>
-       <div className="messages-body" id="messages">
+       <div className="messages-body">
         {messages.map((message) => {
-            const recipient = matches.find(match => match.id === recipientId);
-            const recipientName = recipient ? recipient.name : null;
-            const userName = message.sender_id === user.id ? "You" : recipientName
-          return <div className="messages" key={message.id}>
+          const recipient = matches.find(match => match.id === recipientId);
+          const recipientName = recipient ? recipient.name : null;
+          const userName = message.sender_id === user.id ? "You" : recipientName
+          console.log(message)
+          return <div className="messages" key={message.body}>
             <p>{userName}: {message.body}</p>
              </div>
         })}
