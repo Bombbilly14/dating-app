@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import MatchedCards from './MatchedCards.js'
 
 function MatchedUsersPage({me}) {
 const [connections, setUserConnections] = useState([])
@@ -14,16 +15,18 @@ const [connections, setUserConnections] = useState([])
           });
       }, [me.id]);
 
-      const users=  connections.filter(connection => connection.accepted === true).map(connection => {
+      const users=  connections.filter(connection => connection.accepted === true).map((connection, index) => {
         return (
-          <div key={connection.id}>
-            <h1>{connection.recipient.name}</h1>
+
+          <MatchedCards connection={connection} key={index}/>
+          // <div key={connection.id}>
+          //   <h1>{connection.recipient.name}</h1>
              
-            <p>Bio: {connection.recipient.bio || 'Not provided'}</p>
-            <p>Location: {connection.recipient.location}</p>
-            <p>Gender: {connection.recipient.gender}</p>
-            <p>Age: {connection.recipient.age}</p>
-          </div>
+          //   <p>Bio: {connection.recipient.bio || 'Not provided'}</p>
+          //   <p>Location: {connection.recipient.location}</p>
+          //   <p>Gender: {connection.recipient.gender}</p>
+          //   <p>Age: {connection.recipient.age}</p>
+          // </div>
         );
       });
   return (
