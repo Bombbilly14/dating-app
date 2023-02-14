@@ -7,14 +7,14 @@
     position: fixed;
     z-index: 2;
 }
-.sidenavClosed {
+/* .sidenavClosed {
 
     transition: width 0.2s ease-in-out;
     width: 60px;
     z-index: 2;
     position: fixed;
     
-}
+} */
 
 .sideitem {
     display: flex;
@@ -22,6 +22,7 @@
     padding: 20px 20px;
     cursor: pointer;
     color: black;
+    
     text-decoration: none;
     overflow: hidden;
 }
@@ -36,7 +37,8 @@
 }
 
 .sideitem:hover {
-    background-color: purple;
+    background-color: #A817B5;
+    color: white
 
 }
 .menuBtn {

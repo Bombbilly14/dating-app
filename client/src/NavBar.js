@@ -1,36 +1,170 @@
-import React from 'react'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from "react-router-dom"
-import { navData } from "./NavData.js";
+import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
-import { useState } from "react";
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+
+const pages = [{ name: 'Home', path: '/home' },
+{ name: 'Pricing', path: '/pricing' },
+{ name: 'Blog', path: '/blog' }
+];
+const settings = ['Profile', 'Logout'];
 
 
+export default function NavBar({me}) {
 
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-export default function NavBar() {
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-  const [open, setopen] = useState(false)
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-    const toggleOpen = () => {
-        setopen(!open)
-    }
-  
-    return (
-      
-      <div className={open?styles.sidenav:styles.sidenavClosed}>
-          <button className={styles.menuBtn} onClick={toggleOpen}>
-              {open? <KeyboardDoubleArrowLeftIcon />: <KeyboardDoubleArrowRightIcon />}
-              </button>
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <AppBar position="static" sx={{backgroundColor: '#7033FF', color: '#17B5A8'}}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters >
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {navData.map(item =>{
+            return <NavLink key={item.id} className={styles.sideitem} to={item.link}>
+              {item.icon}
+              <span className={styles.linkText}>{item.text}</span>
+          </NavLink>
+          })}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ color: 'pink', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {navData.map(item =>{
             return <NavLink key={item.id} className={styles.sideitem} to={item.link}>
               {item.icon}
               <span className={styles.linkText}>{item.text}</span>
           </NavLink>
           })}
+          </Box>
 
-      </div>
-    )
-  }
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} image="true">
+                {/* { me.avatar.img ? <Avatar alt="User" src={me.avatar.img} /> : null} */}
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {profileData.map(item =>{
+            return <NavLink key={item.id} className={styles.sideitem} to={item.link}>
+              {item.icon}
+              <span className={styles.linkText}>{item.text}</span>
+          </NavLink>
+          })}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+}
+
 

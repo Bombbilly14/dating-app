@@ -1,35 +1,35 @@
-.nav-bar .featherIcon {
+/* .nav-bar .featherIcon {
 	@media only screen and (min-width: 1250px) {
 		display: none;
 	}
-}
+} */
 
-.nav-bar .title {
+/* .nav-bar .title {
 	margin-left: 15px;
 	@media only screen and (max-width: 1250px) {
 		display: none;
 	}
-}
+} */
 
-h2 a {
+/* h2 a {
 	display: block;
 	width: 100%;
 	height: 100%;
-  }
+  } */
 
-a {
+/* a {
 	text-decoration: none;
 	color: inherit;
 	width: 100%;
-}
-.nav-bar .icon-links {
+} */
+/* .nav-bar .icon-links {
 	display: grid;
 	@media only screen and (max-width: 1200px) {
 		grid-template-columns: 0.5fr;
 		display: none;
 	}
-}
-.nav-bar h2 {
+} */
+/* .nav-bar h2 {
 	font-size: 22px;
 	@media only screen and (max-width: 1200px) {
 		padding-left: 0;
@@ -41,21 +41,22 @@ a {
 	border-radius: 25px;
 	width: 210px;
 	
-}
-.nav-bar h2:hover {
+} */
+/* .nav-bar h2:hover { */
 	/* color: ${(props) => props.theme.primary}; */
-	background: #55abee29;
-	@media only screen and (max-width: 1200px) {
+	/* background: #55abee29; */
+	/* @media only screen and (max-width: 1200px) { */
 		/* color: ${(props) => props.theme.primary}; */
-		background: transparent;
-	}
-}
+		/* background: transparent; */
+	/* }
+} */
 
-.nav-bar button,
+/* .nav-bar button,
 .nav-bar button span {
 	cursor: pointer;
 	border-radius: 25px;
-}
+	
+} */
 
 /* .nav-bar button {
 	background-color: #55abee;
@@ -64,7 +65,7 @@ a {
 
 	font-weight: bold;
 /* } */ */
-.nav-bar button:focus {
+/* .nav-bar button:focus {
 	outline: none;
 }
 .nav-bar button span {
@@ -75,8 +76,8 @@ a {
 }
 .nav-bar button:hover {
 	background: #228dcf;
-}
-.nav-bar button:active span {
+} */
+/* .nav-bar button:active span {
 	background-color: rgba(0, 0, 0, 0.2);
 	outline: 0;
 }
@@ -85,9 +86,9 @@ a {
 }
 .nav-bar button:disabled {
 	opacity: 0.5;
-}
+} */
 
-.nav-bar {
+/* .nav-bar {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -96,11 +97,11 @@ a {
 	width: 140px;
 	padding-left: 10px;
 	
-  }
+  } */
   
-  .nav-link {
+  /* .nav-link {
 	border-right: 1px solid gray;
 	padding: 10px;
-  }
+  } */
 
   

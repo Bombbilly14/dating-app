@@ -7,7 +7,7 @@ import CardComponent from './CardComponent';
 
 function Home({me}) {
   const [allUsers, setAllUsers] = useState([]);
-// this works but doesnt change accepted to true, stays nil
+
   const handleClick = (match) => {
     fetch("/connections", {
       method: "POST",
