@@ -10,7 +10,8 @@ private
         ActionCable.server.broadcast("chat_#{room}", {
         body: self.body,
         sender_id: self.sender_id,
-        recipient_id: self.recipient_id
+        recipient_id: self.recipient_id,
+        id: self.id
 
         })
     end
