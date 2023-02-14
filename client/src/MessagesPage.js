@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import React from 'react'
 import ActionCable from 'actioncable'
+import Messaging from './Messaging.jsx'
 
 const CableApp = {}
 
@@ -9,7 +10,7 @@ CableApp.cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 function MessagesPage({user, recipientId, matches}) {
   const [messages, setMessages] = useState([])
-console.log(messages)
+
   
 
 
@@ -40,7 +41,7 @@ useEffect(() => {
           {
             received: (data) => {
               setMessages(messages => [...messages, data])
-             // console.log(`data: ${JSON.stringify(data)}`)
+
             },
           }
         );
@@ -79,6 +80,7 @@ const handleSubmit = async (e) => {
 
     return (
       <div className="App">
+        <Messaging />
         <div className="messages-header">
           <h1> messages:</h1>
         </div>
@@ -87,7 +89,6 @@ const handleSubmit = async (e) => {
           const recipient = matches.find(match => match.id === recipient_id);
           const recipientName = recipient ? recipient.name : null;
           const userName = message.sender_id === user.id ? "You" : recipientName
-         // console.log(message)
           return <div className="messages" key={message.id}>
             <p>{userName}: {message.body}</p>
              </div>
