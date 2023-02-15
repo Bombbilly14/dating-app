@@ -1,12 +1,16 @@
-import HomeIcon from '@mui/icons-material/Home'; 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import LoginIcon from '@mui/icons-material/Login';
-import MessageIcon from '@mui/icons-material/Message';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+
 
 
 export const navData = [
 
+    {
+        id: 3,
+        // icon: <HomeIcon/>,
+        text: <span style={{ fontWeight: 'bold'}}>BROWSE</span>,
+        link: "/home"
+    },
     {
         id: 0,
         // icon: <AccountCircleIcon/>,
@@ -21,15 +25,9 @@ export const navData = [
     },
 
     {
-        id: 3,
-        // icon: <HomeIcon/>,
-        text: <span style={{ fontWeight: 'bold'}}>Home</span>,
-        link: "/home"
-    },
-    {
         id: 4,
         // icon: <PersonAddAltIcon/>,
-        text: <span style={{ fontWeight: 'bold'}}>Matched Users</span>,
+        text: <span style={{ fontWeight: 'bold'}}>MATCHES</span>,
         link: "/matches"
     },
     

@@ -4,6 +4,8 @@ import RegistrationForm from './RegistrationForm'
 import SignIn from "./SignIn.js"
 import Modal from 'react-modal';
 import "./styles/Form.css"
+// import DiamondIcon from '@mui/icons-material/Diamond';
+
 
 Modal.setAppElement('#root')
 
@@ -30,13 +32,17 @@ function SignInCreatePage({user, setUser}) {
          <div>
            <div>
            <header>
-       <h2 className="h2-loop">Dating App</h2>
+           
+       {/* <DiamondIcon className="h2-loop" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: 'red' }} /> */}
+       <h2 className="h2-loop">Dates With Ruby </h2>
+       
+       
        </header>
            </div>
         <div className="modalParent">
 
         {user ? <button className="button-create" onClick={logout}>Logout</button> : null}
-        <h1>Welcome {user ? ` ${user.name}` : null}</h1>
+        <h1> {user ? user.name : 'Please Sign-in'}</h1>
         {user === null ? (
           <>
             <SignIn setUser={setUser} />
@@ -46,7 +52,7 @@ function SignInCreatePage({user, setUser}) {
               <br/>
               <RegistrationForm setUser={setUser} />
               
-              <button className="button-create button-sign-in" onClick={closeModal}>Return</button>
+              <button className="button-create" onClick={closeModal}>Return</button>
             </Modal>
           </>
         ) : null}

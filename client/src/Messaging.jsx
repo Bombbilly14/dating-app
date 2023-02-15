@@ -14,7 +14,7 @@ import {
 import './styles/Messaging.css'
 
 function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
-  console.log(matches)
+  
  
           return (
             <MDBContainer fluid className="py-5 gradient-custom">
@@ -50,11 +50,11 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
                                   width="60"
                                 />
                                <div className="pt-1">
-                                  <p className="fw-bold mb-0">{match.name}</p>
+                                  <p className="fw-bold mb-0" style={{color: 'black'}}>{match.name}</p>
                                   <p className="small text-white">
-                                    {/* {match.sent_messages
+                                    {match.sent_messages
                                       .filter(message => message.recipient_id == me.id)
-                                        .pop()} */}
+                                        .pop()?.body}
                                  </p>
                                </div>
                              </div>
@@ -79,18 +79,19 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
       const recipient = matches.find(match => match.id === message.recipient_id);
       const recipientName = recipient ? recipient.name : null;
       const userName = message.sender_id === me.id ? "You" : recipientName;
+      console.log(recipient)
       return (
         <li className="d-flex justify-content-between mb-4" key={message.id}>
           {userName === "You" ? (
             <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+              src={me.avatar.img}
               alt="avatar"
               className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
               width="60"
             />
           ) : (
             <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
+              src={recipient.avatar.img}
               alt="avatar"
               className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
               width="60"
@@ -101,13 +102,13 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
               className="d-flex justify-content-between p-3"
               style={{ borderBottom: "1px solid rgba(255,255,255,.3)" }}
             >
-              <p className="fw-bold mb-0">{userName}</p>
+              <p className="fw-bold mb-0" style={{color: 'black'}}>{userName}</p>
               <p className="text-light small mb-0">
                 {/* <MDBIcon far icon="clock" /> {message.created_at} */}
               </p>
             </MDBCardHeader>
             <MDBCardBody size='lg'>
-              <p className="mb-0">{message.body}</p>
+              <p className="mb-0" style={{color: 'black'}}>{message.body}</p>
             </MDBCardBody>
           </MDBCard>
         
@@ -116,7 +117,7 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
     })}
     
           <form onSubmit={handleSubmit}>
-            <MDBInput  type="text" name="message" size="lg"/>
+            <MDBInput className="Message-input" type="text" name="message" size="lg" />
             <MDBBtn  type="submit">
               Send
             </MDBBtn>
