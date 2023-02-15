@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import DiamondIcon from '@mui/icons-material/Diamond';
 import { NavLink } from "react-router-dom"
 import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
@@ -44,11 +44,12 @@ export default function NavBar({me}) {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: 'rgba(213, 126, 235, 1)', color: '#17B5A8'}}>
+    <AppBar position="static" sx={{backgroundColor: 'rgba(213, 126, 235, 1)', color: 'red'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+          <DiamondIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+             />
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -63,8 +64,8 @@ export default function NavBar({me}) {
               textDecoration: 'none',
             }}
           >
-            LOGO
-          </Typography>
+            Dates with Ruby
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -103,7 +104,7 @@ export default function NavBar({me}) {
           })}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <DiamondIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -120,7 +121,7 @@ export default function NavBar({me}) {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Dates with Ruby
           </Typography>
           <Box sx={{ color: 'pink', flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {navData.map(item =>{
@@ -134,7 +135,7 @@ export default function NavBar({me}) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} image="true">
-                {/* { me.avatar.img ? <Avatar alt="User" src={me.avatar.img} /> : null} */}
+                { me.avatar.img ? <Avatar alt="User" src={me.avatar.img} /> : null}
               </IconButton>
             </Tooltip>
             <Menu

@@ -9,6 +9,7 @@
         cursor: pointer;
         margin-top: 50px;
         width: 140px;
+        margin-left: 175px;
       }
       .button-create:hover {
         padding: 10px 30px;
@@ -36,11 +37,10 @@
         padding-top: 50px;
         padding-right: 10px;
         width: 25%;
-        opacity: 0.9
+        opacity: 0.9;
+        
     
-        /* display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) */
-        /* other styles */
+     
       }
       
       .sign-in-form {
@@ -129,7 +129,7 @@
   }
   
   .button-margin {
-    margin-right: 95px
+    /* margin-right: 95px */
   }
   .button-sign-in {
     width: 35%

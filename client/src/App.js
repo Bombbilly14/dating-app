@@ -10,13 +10,15 @@ import MyProfile from './MyProfile'
 import Home from "./Home"
 import PrivateRoute from './utils/PrivateRoute.js'
 import './styles/Messaging.css'
+import UserProfile from './UserProfile';
 // import './styles/index.css';
 
 
 
 function App({cable}) {
 //when ready uncomment below
-  const [me, setMe] = useState([])
+  const [me, setMe] = useState()
+  
 
 
   useEffect(()=> {
@@ -42,12 +44,14 @@ function App({cable}) {
     <Routes >
     <Route element={<PrivateRoute user={me} setUser={setMe}/>}>
     <Route path="/home" element={<Home me={me}/>} />
-    <Route path="/profile" element={<MyProfile user={me} setUser={setMe} />} />
-    {/*  not sure about below path*/}
+    <Route path="/" element={<Home me={me}/>} />
+    {me ? <Route path="/profile" element={<MyProfile user={me} setUser={setMe} />} /> : null }
+    <Route path="/users/:userId" element={<UserProfile />} />
     <Route path="/matches" element={<MatchedUsersPage me={me} />} />
-    <Route path="/messages" element={<ChatPage me={me} cable={cable}/>} />
+    {me ? <Route path="/messages" element={<ChatPage me={me} cable={cable}/>} />: null }
     </Route>
     <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe} />} />
+    
     </Routes>
   </div>
  )
