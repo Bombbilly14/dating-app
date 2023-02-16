@@ -1,8 +1,4 @@
 
-import LoginIcon from '@mui/icons-material/Login';
-
-
-
 export const navData = [
 
     {
@@ -11,12 +7,12 @@ export const navData = [
         text: <span style={{ fontWeight: 'bold'}}>BROWSE</span>,
         link: "/home"
     },
-    {
-        id: 0,
-        // icon: <AccountCircleIcon/>,
-        text: <span style={{ fontWeight: 'bold'}}>PROFILE</span>,
-        link: "/profile"
-    },
+    // {
+    //     id: 0,
+    //     // icon: <AccountCircleIcon/>,
+    //     text: <span style={{ fontWeight: 'bold'}}>PROFILE</span>,
+    //     link: "/profile"
+    // },
     {
         id: 1,
         // icon: <MessageIcon/>,
@@ -31,12 +27,12 @@ export const navData = [
         link: "/matches"
     },
     
-    {
-        id: 2,
-        icon: <LoginIcon/>,
-        text: <span style={{ fontWeight: 'bold' }}>Logout</span>,
-        link: "/signin"
-    }
+    // {
+    //     id: 2,
+    //     icon: <LoginIcon/>,
+    //     text: <span style={{ fontWeight: 'bold' }}>Logout</span>,
+    //     link: "/signin"
+    // }
 ]
 
 export const profileData = [
@@ -51,7 +47,7 @@ export const profileData = [
         id: 1,
 
         text: <span style={{ fontWeight: 'bold'}}>Logout</span>,
-        link: "/logout"
+        link: "/signin"
     },
 
 ]

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles/Profile.css'
-import { MDBInput, MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
+import {  MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 
 function MyProfile({ user , setUser}) {
@@ -8,8 +8,8 @@ function MyProfile({ user , setUser}) {
   const [bio, setBio] = useState("")
   const [location, setLocation] = useState("")
   const [age, setAge] = useState("")
-  const [avatarData, setAvatarData] = useState(null)
-  const [avatar, setAvatar] = useState("")
+  const [avatarData, setAvatarData] = useState("")
+  
   const [editingAvatar, setEditingAvatar] = useState(false)
   
 
@@ -64,7 +64,7 @@ function MyProfile({ user , setUser}) {
     }
   };
 
-  const handleFileSubmit = (e) => {
+  const handleFileSubmit = async (e) => {
     e.preventDefault();
     setEditingAvatar(false);
 
@@ -72,10 +72,13 @@ function MyProfile({ user , setUser}) {
     fileData.append('user_id', user.id)
     fileData.append('img', avatarData)
 
-    fetch(`/avatars/${user.avatar.id}`, {
+    const response = await fetch(`/avatars/${user.avatar.id}`, {
       method: 'PATCH',
       body: fileData
     })
+    
+    const data = await response.json()
+    setUser(data)
     
 
   }
@@ -110,8 +113,8 @@ function MyProfile({ user , setUser}) {
             <MDBCard>
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2A0419', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                  <MDBCardImage src={user.avatar.img}
-                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} />
+                  {user?.avatar ? <MDBCardImage src={user.avatar.img}
+                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} /> : null}
                     {editingAvatar || editing ? null : (
                       <div style={{ display: 'flex' }}>
                         <MDBBtn onClick={handleEditClick} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
@@ -200,10 +203,11 @@ function MyProfile({ user , setUser}) {
         <MDBCardText className="lead fw-normal mb-0">Edit Avatar</MDBCardText>
           <form onSubmit={handleFileSubmit}>
             <label htmlFor="avatar"></label>
-            <MDBInput
+            <input
             type="file"
             accept="image/*"
             id="avatar"
+            
             onChange={handleFileChange}
             />
             <br />

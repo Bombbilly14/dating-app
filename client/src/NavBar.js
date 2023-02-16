@@ -8,19 +8,16 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { NavLink } from "react-router-dom"
 import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
 
-const pages = [{ name: 'Home', path: '/home' },
-{ name: 'Pricing', path: '/pricing' },
-{ name: 'Blog', path: '/blog' }
-];
-const settings = ['Profile', 'Logout'];
+
+
 
 
 export default function NavBar({me}) {

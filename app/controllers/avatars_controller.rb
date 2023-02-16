@@ -33,7 +33,7 @@ class AvatarsController < ApplicationController
           end
 
 
-          render json: avatar, status: :accepted
+          render json: user, status: :accepted
 
       end
 

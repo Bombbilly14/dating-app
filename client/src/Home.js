@@ -8,30 +8,7 @@ import CardComponent from './CardComponent';
 function Home({me}) {
   const [allUsers, setAllUsers] = useState([]);
 
-  const handleClick = (match) => {
-    fetch("/connections", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        sender_id: me.id,
-        recipient_id: match.id
-      })
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to create connection");
-        }
-        return response.json();
-      })
-      .then(connection => {
-        console.log("Connection created:", connection);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
+
 
 
   useEffect(() => {
@@ -41,11 +18,11 @@ function Home({me}) {
   }, []);
   
 
-
+  const otherUsers = allUsers.filter(user => user.id !== me.id);
   return (
     <div className="card-container">
-        {allUsers.map((match, index) => (
-            <CardComponent match={match} key={index} handleClick={() => handleClick(match)}/>
+        {otherUsers.map((match, index) => (
+            <CardComponent match={match} key={index} me={me}/>
         ))}
     </div>
   )

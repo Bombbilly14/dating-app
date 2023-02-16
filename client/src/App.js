@@ -46,8 +46,8 @@ function App({cable}) {
     <Route path="/home" element={<Home me={me}/>} />
     <Route path="/" element={<Home me={me}/>} />
     {me ? <Route path="/profile" element={<MyProfile user={me} setUser={setMe} />} /> : null }
-    <Route path="/users/:userId" element={<UserProfile />} />
-    <Route path="/matches" element={<MatchedUsersPage me={me} />} />
+    {me ? <Route path="/users/:userId" element={<UserProfile me={me}/>} />: null }
+    {me ? <Route path="/matches" element={<MatchedUsersPage me={me} />} /> : null }
     {me ? <Route path="/messages" element={<ChatPage me={me} cable={cable}/>} />: null }
     </Route>
     <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe} />} />

@@ -37,20 +37,7 @@ class ConnectionsController < ApplicationController
     
       render json: connection
     end
-    #original create
-    # def create
-    #   sender = User.find(params[:sender_id])
-    #   recipient = User.find(params[:recipient_id])
-    
-    #   if sender.sent_connections.exists?(recipient_id: recipient.id)
-    #     render json: { message: "Connection already exists" }, status: :unprocessable_entity
-    #     return
-    #   end
-    
-    #   connection = Connection.create(sender_id: sender.id, recipient_id: recipient.id)
-    
-    #   render json: connection
-    # end
+  
     
 
     def update

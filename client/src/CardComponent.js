@@ -1,11 +1,11 @@
 // import userEvent from '@testing-library/user-event';
 import React from 'react'
-import { Card, Button } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import './styles/Home.css'
 import { Link } from "react-router-dom";
 import UserProfile from './UserProfile';
 
-function CardComponent({match, handleClick}) {
+function CardComponent({match, me}) {
   
 
     return (
@@ -26,7 +26,7 @@ function CardComponent({match, handleClick}) {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-          {/* MATCHES WITH USERS!!! but i need to redirect to profile, then can match there <Button onClick={handleClick} primary>Match with user</Button> */}
+          
           </Card.Content>
         </Card>
 
