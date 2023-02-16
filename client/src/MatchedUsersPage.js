@@ -8,17 +8,14 @@ useEffect(() => {
   .then(response => response.json())
   .then(connections => {
             const userConnections = connections.filter(connection => connection.sender_id === me.id || connection.recipient_id === me.id);
-           
-            
+
             setUserConnections(userConnections);
             console.log(userConnections)
           });
         }, [me.id]);
-        
-        
+
         const users=  connections.filter(connection => connection.accepted === true).map((connection, index) => {
           return (
-            
             <MatchedCards connection={connection} key={index} me={me}/>
             );
           });

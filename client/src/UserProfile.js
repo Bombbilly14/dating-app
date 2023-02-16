@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography } from 'mdb-react-ui-kit';
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage,  MDBTypography } from 'mdb-react-ui-kit';
 
-function UserProfile() {
+
+function UserProfile({ me }) {
 
     const [user, setUser] = useState();
     const { userId } = useParams();
+    const [connectionStatus, setConnectionStatus] = useState(null);
 
     useEffect(() => {
         console.log(user)
@@ -13,7 +15,45 @@ function UserProfile() {
           .then(res => res.json())
           .then(userData => setUser(userData));
       }, []);
-      
+    
+
+      const handleClick = (user) => {
+        fetch("/connections", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            sender_id: me.id,
+            recipient_id: user.id
+          })
+        })
+        .then(response => {
+            if (!response.ok) {
+                setConnectionStatus('repeated')
+                setTimeout(() => {
+                    setConnectionStatus(null);
+                }, 4000); 
+                throw new Error("Failed to create connection")
+
+            }
+            return response.json();
+        })
+        .then(connection => {
+            console.log("Connection created:", connection);
+            setConnectionStatus(connection && connection.accepted === true ? 'true' : 'null');
+           
+                setTimeout(() => {
+                    setConnectionStatus(null);
+                }, 4000); 
+            
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    };
+
+
   return (
     <div>
         {user ?
@@ -23,8 +63,8 @@ function UserProfile() {
           <MDBCard>
             <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2A0419', height: '200px' }}>
               <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
+                <button onClick={() => handleClick(user) }>Match with user</button>
                 <MDBCardImage src={user.avatar.img} alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} /> 
-                 
                 
               </div>
               
@@ -53,7 +93,21 @@ function UserProfile() {
                 </div>
               </div>
               <div className="d-flex justify-content-between align-items-center mb-4">
-               
+              {connectionStatus === 'null' &&
+                                <div className="alert alert-info" role="alert">
+                                    You have sent a request to match.
+                                </div>
+                            }
+                            {connectionStatus === 'true' &&
+                                <div className="alert alert-success" role="alert">
+                                    You have matched with this user!
+                                </div>
+                            }
+                            {connectionStatus === 'repeated' &&
+                                <div className="alert alert-danger" role="alert">
+                                    You have already sent a request to match with this user.
+                                </div>
+                            }
               </div>
              
             </MDBCardBody>
