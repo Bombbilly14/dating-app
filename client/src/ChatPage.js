@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-// import MessagesPage from './MessagesPage'
 import ActionCable from 'actioncable'
 import Messaging from './Messaging.jsx'
 
@@ -77,7 +76,7 @@ const handleSubmit = async (e) => {
     setMessages([...messages, data]);
   }
 };
-    //Matches are all users for now
+   
 
     useEffect(() => {
 
@@ -97,20 +96,7 @@ const handleSubmit = async (e) => {
 
       return (
         <div>
-            {/* <div style={{display: 'flex'}}>
-                <div>ChatPage</div>
-                <div style={{marginLeft: '400px'}}>
-                    
-                    {matches.map((match) => (
-                        <div key={match.id} onClick={() => handleUserClick(match.id)}>
-                            {match.name}
-                            
-                        </div>
-                    ))}
-                </div>
-            </div> */}
             <Messaging matches={matches} handleUserClick={handleUserClick} messages={messages} me={me} handleSubmit={handleSubmit}/>
-                    {/* <MessagesPage recipientId={recipientId} matches={matches} user={me}/> */}
         </div>
     );
 }

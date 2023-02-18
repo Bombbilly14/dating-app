@@ -9,9 +9,8 @@ function MyProfile({ user , setUser}) {
   const [location, setLocation] = useState("")
   const [age, setAge] = useState("")
   const [avatarData, setAvatarData] = useState("")
-  
   const [editingAvatar, setEditingAvatar] = useState(false)
-  
+
 
 
   const handleEditClick = () => {
@@ -94,8 +93,8 @@ function MyProfile({ user , setUser}) {
         if (!response.ok) {
           throw new Error('Failed to delete user');
         }
-
-        setUser(null);
+        setUser(null)
+        
       } catch (error) {
         console.log(error);
       }
@@ -221,7 +220,7 @@ function MyProfile({ user , setUser}) {
         </>
       ) : (
         <div className="d-grid gap-2 mb-4">
-        <button className="btn btn-danger" type="button" onClick={handleDeleteClick}>
+        <button className="btn btn-danger" onClick={handleDeleteClick}>
           Delete account
         </button>
         </div>
