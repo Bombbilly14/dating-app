@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        user = find_user
+        user = User.find(session[:user_id])
         user.destroy
 
         head :no_content
