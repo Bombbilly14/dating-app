@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import MessagesPage from './MessagesPage'
+// import MessagesPage from './MessagesPage'
 function MatchedCards({connection, me}) {
     console.log(connection)
     const user = connection.recipient_id === me.id ? connection.sender : connection.recipient;
@@ -23,9 +23,9 @@ function MatchedCards({connection, me}) {
         </Card.Description>
         </Card.Content>
         <Card.Content extra>
-        <Link to={`/messages`} element={<MessagesPage />}>
+        {/* <Link to={`/messages`} element={<MessagesPage />}> */}
         <Button  primary>Message</Button>
-        </Link>
+        {/* </Link> */}
          </Card.Content>
      </Card>
      </>
