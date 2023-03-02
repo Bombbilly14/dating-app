@@ -79,6 +79,8 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
                         console.log(recipient)
                         return (
                           <li className="d-flex justify-content-between mb-4" key={message.id}>
+                            {console.log(recipient)}
+                            {console.log(recipient && recipient.avatar)}
                             {userName === "You" ? (
                               <img
                                 src={me.avatar.img}
