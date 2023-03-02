@@ -75,13 +75,16 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
 
                         const recipient = matches.find(match => match.id === message.recipient_id);
                         const recipientName = recipient ? recipient.name : null;
-                        const userName = message.sender_id === me.id ? "You" : recipientName;
-                        console.log(recipient)
+                        const userName = message.sender_id === me.id ? "You" : (recipient && recipient.id === me.id ? message.sender_name : recipientName);
+
+
+
+                        console.log(recipient.name)
+                        console.log(message.sender_id)
+                        console.log(me.id)
                         return (
                           <li className="d-flex justify-content-between mb-4" key={message.id}>
-                            {console.log(recipient)}
-                            {console.log(recipient && recipient.avatar)}
-                            {userName === "You" ? (
+                            {message.sender_id === me.id ? (
                               <img
                                 src={me.avatar.img}
                                 alt="avatar"

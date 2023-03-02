@@ -1,6 +1,6 @@
 import './styles/App.css';
 import {useEffect, useState} from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import MatchedUsersPage from './MatchedUsersPage'
 import ChatPage from './ChatPage'
@@ -11,12 +11,12 @@ import Home from "./Home"
 import PrivateRoute from './utils/PrivateRoute.js'
 import './styles/Messaging.css'
 import UserProfile from './UserProfile';
-// import './styles/index.css';
+
 
 
 
 function App({cable}) {
-//when ready uncomment below
+
   const [me, setMe] = useState()
   
 
@@ -42,6 +42,7 @@ function App({cable}) {
   <div fluid className="py-5 gradient-custom">
     {me ? <NavBar me={me}/> : null}
     <Routes >
+    <Route path="*" element={<Navigate to="/signin" />} />
     <Route element={<PrivateRoute user={me} setUser={setMe}/>}>
     <Route path="/home" element={<Home me={me}/>} />
     <Route path="/" element={<Home me={me}/>} />
