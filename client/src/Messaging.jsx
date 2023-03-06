@@ -73,31 +73,30 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
                  <MDBTypography listUnStyled className="text-white">
                     {messages.map((message) => {
 
-                        const recipient = matches.find(match => match.id === message.recipient_id);
-                        const recipientName = recipient ? recipient.name : null;
-                        const userName = message.sender_id === me.id ? "You" : (recipient && recipient.id === me.id ? message.sender_name : recipientName);
-
-
-
-                        console.log(recipient.name)
-                        console.log(message.sender_id)
-                        console.log(me.id)
+                      const sender = matches.find(match => match.id === message.sender_id);
+                      const recipient = matches.find(match => match.id === message.recipient_id);
+                      const senderName = sender ? sender.name : null;
+                      const senderAvatar = sender ? sender.avatar.img : null;
+                      const recipientName = recipient ? recipient.name : null;
+                      const userName =
+                       message.sender_id === me.id ? "You" :
+                        message.sender_id === recipient.id ? recipientName : senderName;
                         return (
                           <li className="d-flex justify-content-between mb-4" key={message.id}>
                             {message.sender_id === me.id ? (
                               <img
                                 src={me.avatar.img}
                                 alt="avatar"
-                                className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                               className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
                                 width="60"
                               />
                             ) : (
                               <img
-                                src={recipient.avatar.img}
+                               src={senderAvatar}
                                 alt="avatar"
-                                className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                                width="60"
-                              />
+                               className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                               width="60"
+                             />
                             )}
                             <MDBCard className="mask-custom">
                               <MDBCardHeader
