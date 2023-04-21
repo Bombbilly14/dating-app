@@ -5,7 +5,7 @@ import './styles/Home.css'
 import { Link } from "react-router-dom";
 import UserProfile from './UserProfile';
 
-function CardComponent({match, me}) {
+function CardComponent({match}) {
   
 
     return (
