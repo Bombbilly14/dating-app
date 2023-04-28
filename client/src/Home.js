@@ -47,7 +47,7 @@ function Home({me}) {
   
   return (
     <div>
-      <div className="dropdown">
+      {/* <div className="dropdown">
         <label htmlFor="age-range-select">Filter users by age range:</label>
         <select id="age-range-select" value={selectedAgeRange} onChange={handleAgeRangeChange}>
           <option value="">All ages</option>
@@ -55,7 +55,7 @@ function Home({me}) {
           <option value="25+">25+</option>
           <option value="35+">35+</option>
         </select>
-      </div>
+      </div> */}
       <div className="card-container">
         {filterMe.map((match, index) => (
             <CardComponent match={match} key={index} me={me}/>
