@@ -37,7 +37,7 @@ function RequestedMatch({connection, me, receivedConnections, setReceivedConnect
           setTimeout(() => {
             setConnectionStatus(null);
           }, 4000);
-          
+
           setReceivedConnections(receivedConnections.map(conn => {
             if (conn.id === updatedConnection.id) {
               return updatedConnection;
@@ -60,15 +60,15 @@ function RequestedMatch({connection, me, receivedConnections, setReceivedConnect
     <Card.Group>
     <Card>
       <Card.Content>
-        {/* <Image
+        <Image
           floated='right'
           size='mini'
-          src={user}
-        /> */}
+          src={user.avatar_url}
+        />
         <Card.Header>{user.name}</Card.Header>
         <Card.Meta>{user.age}</Card.Meta>
         <Card.Description>
-          Steve wants to add you to the group <strong>best friends</strong>
+          {user.name} wants to connect!
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
