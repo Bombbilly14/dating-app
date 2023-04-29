@@ -16,7 +16,7 @@ function Messaging({matches, handleUserClick, me, messages, handleSubmit}) {
 
   const otherUsers = matches.filter(user => user.id !== me.id);
           return (
-            <MDBContainer fluid className="py-5 gradient-custom">
+            <MDBContainer fluid="true" className="py-5 gradient-custom">
               <MDBRow>
                 <MDBCol md="6" lg="5" xl="4" className="mb-4 mb-md-0">
                   <h5 className="font-weight-bold mb-3 text-center text-white">

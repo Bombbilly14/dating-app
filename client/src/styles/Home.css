@@ -1,6 +1,12 @@
 
   .card-container {
+    margin-top: 14px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 16px;
+  }
+
+  .pending-card {
+    margin-top: 10px;
+    grid-template-columns: repeat(4, 1fr);
   }

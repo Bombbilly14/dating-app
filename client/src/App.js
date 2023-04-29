@@ -39,7 +39,7 @@ function App({cable}) {
 
 
  return (
-  <div fluid className="py-5 gradient-custom">
+  <div fluid="true" className="py-5 gradient-custom">
     {me ? <NavBar me={me}/> : null}
     <Routes >
     <Route path="*" element={<Navigate to="/signin" />} />

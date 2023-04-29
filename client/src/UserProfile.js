@@ -64,7 +64,7 @@ function UserProfile({ me }) {
                 <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2A0419', height: '200px' }}>
                   <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                     <button onClick={() => handleClick(user)}>Match with user</button>
-                    <MDBCardImage src={user.avatar.img} alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} />
+                    <MDBCardImage src={user.avatar.img} alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid="true" style={{ width: '150px', zIndex: '1' }} />
 
                   </div>
 
