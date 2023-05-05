@@ -1,36 +1,83 @@
-// import userEvent from '@testing-library/user-event';
-import React from 'react'
-import { Card } from "semantic-ui-react";
-import './styles/Home.css'
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Modal, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import UserProfile from './UserProfile';
+import './styles/Home.css';
 
-function CardComponent({match}) {
-  
+function CardComponent({ match, me, handleInterest, allUsers }) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(null);
 
-    return (
+  const handleCardClick = (index) => {
+    setCurrentIndex(index);
+    setModalOpen(true);
+  };
 
-        <Card>
-          <Card.Content image="true">
-          <Link to={`/users/${match.id}`} element={<UserProfile />}>
-            <img src={match.avatar.img} alt={match.id} />
-            </Link>
-          </Card.Content>
-          <Card.Content>
-            <Card.Header>{match.name}</Card.Header>
-            <Card.Meta>
-              <span>{match.age} years old</span>
-            </Card.Meta>
-            <Card.Description>
-             {match.bio}
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-          
-          </Card.Content>
-        </Card>
+  const handleClose = () => {
+    setModalOpen(false);
+    setCurrentIndex(null);
+  };
 
-      );
+  const handleLikeClick = () => {
+    handleInterest(match, true);
+    handleClose();
+  };
+
+  const handleDislikeClick = () => {
+    handleInterest(match, false);
+    handleClose();
+  };
+
+  const handlePrevClick = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
+  };
 
-export default CardComponent
+  const handleNextClick = () => {
+    if (currentIndex < allUsers.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const user = currentIndex !== null && allUsers[currentIndex];
+
+  return (
+    <>
+      <div className="picture-container" onClick={() => handleCardClick(allUsers.indexOf(match))}>
+        {/* <Link to={`/users/${match.id}`} element={<UserProfile />}> */}
+          <img src={match.avatar.img} alt={match.id} />
+          <div className="text-container">
+            <span>{match.name}, {match.age}</span>
+            
+          </div>
+        {/* </Link> */}
+      </div>
+      <Modal open={modalOpen} onClose={handleClose} size='mini' centered={true}>
+        <Modal.Header>
+          {user ? `${user.name}, ${user.age}` : ''}
+        </Modal.Header>
+        {user && (
+          <Modal.Content image>
+            <img src={user.avatar.img} alt={user.id} />
+            <Modal.Description>
+              <p style={{marginLeft: '100px'}}>{user.location}</p>
+              <p style={{marginLeft: '100px'}}>{user.bio}</p>
+              <p style={{marginLeft: '100px'}}>{user.gender}</p>
+            </Modal.Description>
+          </Modal.Content>
+        )}
+        <Modal.Actions>
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+            <Button color="black" icon="angle left" content="Prev" size="huge" onClick={handlePrevClick} />
+            <Button color="red" icon="close" content="No" size="huge" onClick={handleDislikeClick} />
+            <Button color="green" icon="check" content="Yes" size="huge" onClick={handleLikeClick} />
+            <Button color="black" icon="angle right" content="Next" size="huge" onClick={handleNextClick} />
+          </div>
+        </Modal.Actions>
+      </Modal>
+    </>
+  );
+}
+
+export default CardComponent;

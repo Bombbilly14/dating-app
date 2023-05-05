@@ -1,12 +1,113 @@
 
   .card-container {
-    margin-top: 14px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 16px;
+    /* border: 1px solid red; */
+    
   }
 
   .pending-card {
     margin-top: 10px;
     grid-template-columns: repeat(4, 1fr);
   }
+
+  .ui.modal {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    height: 50%;
+    width: 50% !important
+  }
+  
+  
+  .user-card img {
+    width: 75%;
+    height: 75%;
+    object-fit: cover;
+  }
+  
+  .user-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 24px;
+  }
+  
+  .user-name {
+    margin: 0;
+    padding: 0;
+  }
+
+  .picture-container {
+    position: relative;
+  }
+  
+  .picture-container img {
+    display: block;
+    width: 75%;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .text-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  .text-container span {
+    display: block;
+  }
+  .loading-text {
+    color: white !important;
+  }
+  .home-wrapper {
+    margin-top: 50px;
+    /* border: 1px solid white !important; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-loader-wrapper {
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .custom-loader {
+    
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(#AA0606 0 0) bottom/100% 0% no-repeat #E4E4ED;
+    -webkit-mask: 
+      radial-gradient(circle at 60% 65%, #000 62%, #0000 65%) top left, 
+      radial-gradient(circle at 40% 65%, #000 62%, #0000 65%) top right, 
+      linear-gradient(to bottom left, #000 42%,#0000 43%) bottom left , 
+      linear-gradient(to bottom right,#000 42%,#0000 43%) bottom right;
+    -webkit-mask-size: 50% 50%;
+    -webkit-mask-repeat: no-repeat;
+    animation: p9 2.4s infinite linear;
+  }
+  
+  @keyframes p9 {
+    90%,100% {background-size:100% 100%}
+  }
+
+  
