@@ -41,7 +41,8 @@ export default function NavBar({me}) {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: 'rgba(213, 126, 235, 1)', color: 'red'}}>
+    <AppBar position="static" sx={{backgroundImage: 'linear-gradient( 111.4deg, rgba(27,24,113,1) 6.5%, rgba(100,43,115,1) 93.2% )', color: 'red', borderRadius: '10px'}}>
+
       <Container maxWidth="xl">
         <Toolbar disableGutters >
           <DiamondIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}

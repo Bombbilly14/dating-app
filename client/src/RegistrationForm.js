@@ -8,6 +8,7 @@ function RegistrationForm({setUser}) {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [gender, setGender] = useState('');
   const navigate = useNavigate()
 
   const createAccount = (e) => {
@@ -27,7 +28,7 @@ function RegistrationForm({setUser}) {
     headers: {
         "Content-Type": "application/json",
     },
-    body: JSON.stringify({name, email, password}),
+    body: JSON.stringify({name, email, password, gender}),
 })
 .then(r => r.json())
 .then((data) => {
@@ -76,6 +77,20 @@ function RegistrationForm({setUser}) {
         placeholder="Confirm Password"
           />
           <br />
+          <label htmlFor="gender">Gender Pronouns:</label>
+        <select
+          id="gender"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          required
+        >
+          <option value="">Select Pronouns</option>
+          <option value="He/Him">He/Him</option>
+          <option value="She/Her">She/Her</option>
+          <option value="They/Them">They/Them</option>
+          <option value="Other">Other</option>
+        </select>
+        <br />
           <div className="button-container">
         <input className="inputCreate"type= "submit" value="Create Profile"  />
         </div>

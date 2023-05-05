@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './styles/Home.css';
-import './tailwind.css'
 import CardComponent from './CardComponent';
 
-
-
-function Home({me}) {
+function Home({ me }) {
   const [allUsers, setAllUsers] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
   const [originalUsers, setOriginalUsers] = useState([]);
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
-
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/users')
-      .then((response) => response.json())
-      .then((data) => setAllUsers(data));
-  }, []);
+    if (me) {
+      setTimeout(() => {
+        fetch('/users')
+          .then((response) => response.json())
+          .then((data) => {
+            setAllUsers(data);
+            const filterMe = data.filter(user => user.id !== me.id);
+            setOtherUsers(filterMe);
+            setOriginalUsers(filterMe);
+            setIsLoading(false);
+          });
+      }, 1900);
+    }
+  }, [me]);
 
   const filterUsersByAge = (ageRange) => {
-    const originalUsers = allUsers.slice(); // make a copy of the original array
+    const originalUsers = allUsers.slice();
     const filteredUsers = originalUsers.filter(user => {
       const userAge = Number(user.age);
       console.log('userAge:', userAge, 'ageRange:', ageRange);
@@ -34,35 +40,42 @@ function Home({me}) {
         default:
           return true;
       }
-    });
+    }).filter(user => user.id !== me.id);;
     setAllUsers(filteredUsers);
   }
+
   const handleAgeRangeChange = (event) => {
     setSelectedAgeRange(event.target.value);
     filterUsersByAge(event.target.value);
   }
-  
 
-  const filterMe = allUsers.filter(user => user.id !== me.id);
-  
+  const handleInterest = (match, interested) => {
+    // send interest or decline match based on button click
+    console.log(`Match ${match.id} was ${interested ? 'liked' : 'disliked'}.`);
+    // here you can send a request to the server to indicate interest or decline
+  };
+
   return (
-    <div>
-      {/* <div className="dropdown">
-        <label htmlFor="age-range-select">Filter users by age range:</label>
-        <select id="age-range-select" value={selectedAgeRange} onChange={handleAgeRangeChange}>
-          <option value="">All ages</option>
-          <option value="18+">18+</option>
-          <option value="25+">25+</option>
-          <option value="35+">35+</option>
-        </select>
-      </div> */}
-      <div className="card-container">
-        {filterMe.map((match, index) => (
-            <CardComponent match={match} key={index} me={me}/>
-        ))}
-      </div>
+    <div className="home-wrapper">
+    
+      {isLoading ? (
+        <div className="custom-loader-wrapper">
+
+          <div className="custom-loader"></div>
+          <h2 className="loading-text" >Your match, a click away</h2>
+        </div>
+      ) : (
+
+        <div className="card-container">
+
+          {otherUsers.map((match, index) => (
+            <CardComponent match={match} key={index} me={me} handleInterest={handleInterest} allUsers={allUsers} />
+          ))}
+        </div>
+
+      )}
     </div>
-  )
+  );
 }
 
 export default Home;

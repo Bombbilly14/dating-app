@@ -101,12 +101,12 @@ function MyProfile({ user , setUser}) {
     }
   };
 
-
+console.log(user)
 
 
   return (
-    <div>
-      <MDBContainer className="py-5 h-100">
+    <div className="profile-div">
+      <MDBContainer className="py-5 h-50">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="9" xl="7">
             <MDBCard>
@@ -150,6 +150,7 @@ function MyProfile({ user , setUser}) {
                     <MDBCardText className="font-italic mb-1">{user.bio}</MDBCardText>
                     <MDBCardText className="font-italic mb-1">Lives in {user.location}</MDBCardText>
                     <MDBCardText className="font-italic mb-0">{user.name} is {user.age} years old</MDBCardText>
+                    <MDBCardText className="font-italic mb-0">{user.gender}</MDBCardText>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-4">
