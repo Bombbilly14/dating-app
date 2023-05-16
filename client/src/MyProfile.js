@@ -113,7 +113,7 @@ console.log(user)
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2A0419', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                   {user?.avatar ? <MDBCardImage src={user.avatar.img}
-                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid="true" style={{ width: '150px', zIndex: '1' }} /> : null}
+                    alt="Generic placeholder image" className="mt-4 mb-2" style={{ zIndex: '1' }} /> : null}
                     {editingAvatar || editing ? null : (
                       <div style={{ display: 'flex' }}>
                         <MDBBtn onClick={handleEditClick} outline color="dark" style={{height: '36px', overflow: 'visible'}}>

@@ -1,24 +1,37 @@
-.gradient-custom {
-    /* fallback for old browsers */
-    background: #fccb90;
-    height: 100;
-  
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(
-      to bottom right,
-      rgba(252, 203, 144, 1),
-      rgba(213, 126, 235, 1)
-    );
-  
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgb(51, 12, 59) 0%, rgb(27, 0, 27) 90% );
-  }
-  
-  .mask-custom {
-    background: rgba(24, 24, 16, 0.2);
-    border-radius: 2em;
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 255, 255, 0.05);
-    background-clip: padding-box;
-    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-  }
+.card-body {
+  max-height: 65vh;
+  overflow-y: auto;
+
+}
+
+.message-card {
+  max-width: 35%;
+}
+
+.my-message {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-message .message-card {
+  background-color: rgb(144, 199, 218);
+}
+
+.other-message {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 100px;
+}
+
+.other-message .message-card {
+  background-color: white;
+}
+
+.message-text {
+  color: black;
+}
+
+.avatar {
+  align-self: flex-end;
+}
+
