@@ -9,7 +9,6 @@ import SignInCreatePage from './SignInCreatePage'
 import MyProfile from './MyProfile'
 import Home from "./Home"
 import PrivateRoute from './utils/PrivateRoute.js'
-import './styles/Messaging.css'
 import UserProfile from './UserProfile';
 
 
@@ -39,7 +38,7 @@ function App({cable}) {
 
 
  return (
-  <div fluid="true" className="py-5 gradient-custom">
+  <div className="app-container">
     {me ? <NavBar me={me}/> : null}
     <Routes >
     <Route path="*" element={<Navigate to="/signin" />} />

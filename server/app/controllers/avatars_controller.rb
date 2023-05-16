@@ -27,7 +27,7 @@ class AvatarsController < ApplicationController
             puts "params[:img] value: #{params[:img].inspect}"
            image = ImageProcessing::MiniMagick.source(params[:img])
             puts "Original image size: #{image.size}"
-            processed_image = image.resize_to_limit!(250, 200)
+            processed_image = image.resize_to_fill!(250, 200)
             puts "Processed image size: #{processed_image.size}"
             avatar.img.attach(io: processed_image, filename: "#{user.id}_#{Time.now.to_i}_avatar.jpg")
           end

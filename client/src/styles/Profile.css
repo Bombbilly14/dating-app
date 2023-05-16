@@ -1,8 +1,11 @@
 .profile-div {
-  height: 100vh;
+  height: 90vh;
 }
 
-
+.img-thumbnail {
+ background-color: red !important;
+ width: 25000px !important;
+}
 .profile-header {
     display: flex;
     /* justify-content: center; */
@@ -28,7 +31,7 @@
     padding: 8px;
     margin-bottom: 16px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #861313;
     border-radius: 4px;
     box-sizing: border-box;
   }

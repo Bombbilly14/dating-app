@@ -16,15 +16,15 @@ function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
 
   const otherUsers = matches.filter(user => user.id !== me.id);
   return (
-    <MDBContainer fluid="true" className="py-5 gradient-custom">
+    <MDBContainer fluid="true" className="py-5 gradient-custom" style={{ maxWidth: '90%', marginLeft: 10, }}>
       <MDBRow>
-        <MDBCol md="6" lg="5" xl="4" className="mb-4 mb-md-0">
+        <MDBCol md="6" lg="5" xl="4" className="mb-4 mb-md-0" >
           {/* <h5 className="font-weight-bold mb-3 text-center text-white">
             Users
           </h5> */}
 
           <MDBCard className="mask-custom">
-            <MDBCardBody>
+            <MDBCardBody className='card-body'>
               <MDBTypography listUnStyled className="mb-0">
                 {otherUsers.map((match) => (
                   <li
@@ -79,42 +79,27 @@ function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
               const senderName = sender ? sender.name : null;
               const senderAvatar = sender ? sender.avatar.img : null;
               const recipientName = recipient ? recipient.name : null;
-              const userName =
-                message.sender_id === me.id ? "You" :
-                  message.sender_id === recipient.id ? recipientName : senderName;
-              return (
-                <li className="d-flex justify-content-between mb-4" key={message.id}>
-                  {message.sender_id === me.id ? (
-                    <img
-                      src={me.avatar.img}
-                      alt="avatar"
-                      className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                      width="60"
-                    />
-                  ) : (
-                    <img
-                      src={senderAvatar}
-                      alt="avatar"
-                      className="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                      width="60"
-                    />
-                  )}
-                  <MDBCard className="mask-custom">
-                    <MDBCardHeader
-                      className="d-flex justify-content-between p-3"
-                      style={{ borderBottom: "1px solid rgba(255,255,255,.3)" }}
-                    >
-                      <p className="fw-bold mb-0" style={{ color: 'black' }}>{userName}</p>
-                      <p className="text-light small mb-0">
-                        {/* <MDBIcon far icon="clock" /> {message.created_at} */}
-                      </p>
-                    </MDBCardHeader>
-                    <MDBCardBody size='lg'>
-                      <p className="mb-0" style={{ color: 'black' }}>{message.body}</p>
-                    </MDBCardBody>
-                  </MDBCard>
 
-                </li>
+              const user = message.sender_id === me.id ? "You" :
+                message.sender_id === recipient.id ? recipientName : senderName;
+              return (
+                <li key={message.id} className={message.sender_id === me.id ? "my-message" : "other-message"}>
+  {message.sender_id !== me.id && (
+    <img
+      src={senderAvatar}
+      alt="avatar"
+      className="rounded-circle align-self-start me-3 shadow-1-strong avatar"
+      width="60"
+    />
+  )}
+  <MDBCard className="mask-custom message-card">
+    <MDBCardBody size='lg'>
+      <p className="mb-0 message-text">{message.body}</p>
+    </MDBCardBody>
+  </MDBCard>
+</li>
+
+
               );
             })}
 
