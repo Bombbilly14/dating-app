@@ -7,6 +7,7 @@ import { BrowserRouter as Router} from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css'
 import ActionCable from 'actioncable'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+
 const CableApp = {}
 CableApp.cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 const root = ReactDOM.createRoot(document.getElementById('root'));

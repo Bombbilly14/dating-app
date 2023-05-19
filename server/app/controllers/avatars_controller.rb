@@ -23,19 +23,19 @@ class AvatarsController < ApplicationController
     def update
         user = User.find(session[:user_id])
         avatar = user.avatar
+      
         if params[:img].present?
-            puts "params[:img] value: #{params[:img].inspect}"
-           image = ImageProcessing::MiniMagick.source(params[:img])
-            puts "Original image size: #{image.size}"
-            processed_image = image.resize_to_fill!(250, 200)
-            puts "Processed image size: #{processed_image.size}"
-            avatar.img.attach(io: processed_image, filename: "#{user.id}_#{Time.now.to_i}_avatar.jpg")
-          end
+          image = ImageProcessing::MiniMagick.source(params[:img].tempfile.path)
 
-
-          render json: user, status: :accepted
-
+          temp_file = Tempfile.new(["processed_image", ".jpg"])
+          image.resize_to_fill(250, 250).call(destination: temp_file.path)
+      
+          avatar.img.attach(io: File.open(temp_file.path), filename: "#{user.id}_#{Time.now.to_i}_avatar.jpg")
+        end
+      
+        render json: user, status: :accepted
       end
+
 
     private
 

@@ -42,7 +42,7 @@ function SignInCreatePage({user, setUser}) {
         <div className="modalParent">
 
         {user ? <button className="button-create" onClick={logout}>Logout</button> : null}
-        <h1 className="sign-in-h1"> {user ? null : 'Please Sign-in'}</h1>
+        <h1 className="sign-in-h1" style={{color: 'white'}}> {user ? null : 'Please Sign-in'}</h1>
         {user === null ? (
           <>
             <SignIn setUser={setUser} />

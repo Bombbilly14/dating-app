@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 function RequestedMatch({connection, me, receivedConnections, setReceivedConnections, setAcceptedConnectionId}) {

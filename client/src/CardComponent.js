@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import UserProfile from './UserProfile';
 import './styles/Home.css';
 
 function CardComponent({ match, me, handleInterest, allUsers }) {
@@ -45,13 +43,10 @@ function CardComponent({ match, me, handleInterest, allUsers }) {
   return (
     <>
       <div className="picture-container" onClick={() => handleCardClick(allUsers.indexOf(match))}>
-        {/* <Link to={`/users/${match.id}`} element={<UserProfile />}> */}
           <img src={match.avatar.img} alt={match.id} />
           <div className="text-container">
             <span>{match.name}, {match.age}</span>
-            
           </div>
-        {/* </Link> */}
       </div>
       <Modal open={modalOpen} onClose={handleClose} size='mini' centered={true}>
         <Modal.Header>

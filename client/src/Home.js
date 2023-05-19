@@ -62,7 +62,7 @@ function Home({ me }) {
         <div className="custom-loader-wrapper">
 
           <div className="custom-loader"></div>
-          <h2 className="loading-text" >Your match, a click away</h2>
+          <h2 className="loading-text" style={{fontStyle: 'italic'}} >Your match, a click away</h2>
         </div>
       ) : (
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 function MatchedCards({ connection, me }) {
   const user = connection.recipient_id === me.id ? connection.sender : connection.recipient;
