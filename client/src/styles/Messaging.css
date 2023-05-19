@@ -9,8 +9,11 @@
 }
 
 .my-message {
+  padding-bottom: 5px;
+  padding-top: 5px;
   display: flex;
   justify-content: flex-end;
+  margin-right: 75px;
 }
 
 .my-message .message-card {
@@ -18,9 +21,11 @@
 }
 
 .other-message {
+  padding-bottom: 5px;
+  padding-top: 5px;
   display: flex;
   justify-content: flex-start;
-  margin-left: 100px;
+  margin-left: 75px;
 }
 
 .other-message .message-card {
@@ -35,3 +40,41 @@
   align-self: flex-end;
 }
 
+.message-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.message-box {
+  background-color: rgb(199, 199, 199);
+  width: 100%;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 70vh;
+  height: 70vh;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+
+}
+
+.message-input {
+  border-radius: 5px;
+  border: none;
+  width: 90vh;
+}
+
+
+
+.send-button:hover {
+  color: #0056b3;
+}
+.message-time {
+  text-align: right;
+  font-size: 0.8em;
+  color: grey;
+}

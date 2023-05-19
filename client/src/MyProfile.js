@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Profile.css'
+import 'react-image-crop/dist/ReactCrop.css';
+
 import {  MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 
@@ -101,7 +103,6 @@ function MyProfile({ user , setUser}) {
     }
   };
 
-console.log(user)
 
 
   return (

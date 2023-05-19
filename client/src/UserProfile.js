@@ -14,7 +14,7 @@ function UserProfile({ me }) {
     fetch(`/users/${userId}`)
       .then(res => res.json())
       .then(userData => setUser(userData));
-  }, []);
+  }, [userId, user]);
 
 
   const handleClick = (user) => {
