@@ -10,6 +10,7 @@ import MyProfile from './MyProfile'
 import Home from "./Home"
 import PrivateRoute from './utils/PrivateRoute.js'
 import UserProfile from './UserProfile';
+import LandingPage from './LandingPage';
 
 
 
@@ -39,7 +40,8 @@ function App({cable}) {
 
  return (
   <div className="app-container">
-    {me ? <NavBar me={me}/> : null}
+    <LandingPage />
+    {/* {me ? <NavBar me={me}/> : null}
     <Routes >
     <Route path="*" element={<Navigate to="/signin" />} />
     <Route element={<PrivateRoute user={me} setUser={setMe}/>}>
@@ -52,7 +54,7 @@ function App({cable}) {
     </Route>
     <Route path="/signin" element={<SignInCreatePage user={me} setUser={setMe} />} />
     
-    </Routes>
+    </Routes> */}
   </div>
  )
 }
