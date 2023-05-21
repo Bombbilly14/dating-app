@@ -1,0 +1,9 @@
+.slideshow {
+    margin-right: 400px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60vh;
+    transition: opacity 1s ease-in-out;
+  }

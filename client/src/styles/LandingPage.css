@@ -1,0 +1,68 @@
+.landing-page {
+    text-align: left;
+    background-color: rgb(94, 190, 207);
+    height: 100vh;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .logo {
+    margin-left: 100px;
+    height: 50px;
+    font-style: italic;
+    font-size: 25px;
+    color: black;
+  }
+  
+  .login {
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin-right: 100px;
+  }
+  
+  .site-info {
+    margin-left: 100px;
+    width: 600px;
+    font-size: 50px;
+    color: white;
+    text-shadow: 
+      -6px 4px 0px rgba(0, 0, 0, 1),
+      0px 1px 10px rgba(0, 0, 0, 1),
+      -6px 6px 0px rgba(0, 0, 0, 1);
+  }
+  
+  .join-today {
+    margin-left: 100px;
+    width: 600px; 
+    background-color: rgb(0, 0, 0);
+    padding: 5px;
+    font-size: 20px;;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .get-app {
+    margin-top: 50px;
+    margin-left: 100px;
+    font-size: 20px;
+    color: black;
+  }
+  
+  .app-logos {
+    margin-top: 25px;
+    margin-left: 100px;
+    justify-content: space-around;
+  }
+  
+  .app-logo {
+    height: 40px;
+  }
