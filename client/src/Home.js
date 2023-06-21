@@ -52,12 +52,12 @@ function Home({ me }) {
   const handleInterest = (match, interested) => {
     // send interest or decline match based on button click
     console.log(`Match ${match.id} was ${interested ? 'liked' : 'disliked'}.`);
-    // here you can send a request to the server to indicate interest or decline
+    //send a request to the server to indicate interest or decline
   };
 
   return (
     <div className="home-wrapper">
-    
+      {/* may want to delete custom loader in favor of smooth transitions via css transition */}
       {isLoading ? (
         <div className="custom-loader-wrapper">
 

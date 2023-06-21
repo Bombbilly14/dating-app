@@ -7,11 +7,17 @@ class UsersController < ApplicationController
         #else
           #render json: { errors: "Invalid email or password" }, status: :unauthorized
         #end
-      end
-
-      def index
-        render json: User.all
     end
+
+    def index
+        if params[:gender] && params[:preference]
+          @users = User.filter_by_preference(gender: params[:gender], preference: params[:preference])
+        else
+          @users = User.all
+        end
+        render json: @users
+    end
+      
 
     def show
         user = find_user
@@ -40,9 +46,10 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.permit(:name, :email, :password, :bio, :location, :gender, :age, :img, :avatar)
-        
-    end
+        params.permit(:name, :email, :password, :bio, :location, :gender, :age, :img, :avatar, { gender_preference: [] })
+      end
+      
+    
 
     def avatar_params
         params.permit(:img, :id)

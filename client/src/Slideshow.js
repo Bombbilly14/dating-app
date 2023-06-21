@@ -12,12 +12,25 @@ const Slideshow = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Change images every 5 seconds
+    }, 5000);
 
-    return () => clearInterval(timer); // Clean up interval on unmount
+    return () => clearInterval(timer);
   }, [images.length]);
 
-  return <img className="slideshow" src={images[index]} alt="couple"/>;
+  return (
+    <div className="slideshow-container">
+      {images.map((image, imageIndex) => (
+        <img
+          key={image}
+          className="slideshow"
+          src={image}
+          style={{ opacity: index === imageIndex ? 1 : 0 }}
+          alt="couple"
+        />
+      ))}
+    </div>
+  );
 };
 
 export default Slideshow;
+

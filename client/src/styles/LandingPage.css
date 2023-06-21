@@ -1,68 +1,101 @@
 .landing-page {
-    text-align: left;
-    background-color: rgb(94, 190, 207);
-    height: 100vh;
-  }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .logo {
-    margin-left: 100px;
-    height: 50px;
-    font-style: italic;
-    font-size: 25px;
-    color: black;
-  }
-  
-  .login {
-    padding: 10px;
-    border: 1px solid black;
-    cursor: pointer;
-    margin-right: 100px;
-  }
-  
-  .site-info {
-    margin-left: 100px;
-    width: 600px;
-    font-size: 50px;
-    color: white;
-    text-shadow: 
-      -6px 4px 0px rgba(0, 0, 0, 1),
-      0px 1px 10px rgba(0, 0, 0, 1),
-      -6px 6px 0px rgba(0, 0, 0, 1);
-  }
-  
-  .join-today {
-    margin-left: 100px;
-    width: 600px; 
-    background-color: rgb(0, 0, 0);
-    padding: 5px;
-    font-size: 20px;;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  
-  .get-app {
-    margin-top: 50px;
-    margin-left: 100px;
-    font-size: 20px;
-    color: black;
-  }
-  
-  .app-logos {
-    margin-top: 25px;
-    margin-left: 100px;
-    justify-content: space-around;
-  }
-  
-  .app-logo {
-    height: 40px;
-  }
+  text-align: left;
+  height: 100vh;
+  background-color: rgba(128, 0, 128, 0.76);
+  background-image: linear-gradient(rgba(153, 0, 94, 0.747), rgb(39, 0, 39));
+}
+
+.intro-content {
+  margin-top: 50px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.logo {
+  margin-left: 100px;
+  height: 50px;
+  font-style: italic;
+  font-size: 25px;
+  color: rgb(224, 221, 221);
+}
+
+.login {
+  padding: 10px;
+  border: 1px solid rgb(255, 253, 253);
+  cursor: pointer;
+  margin-right: 100px;
+  color: white;
+}
+
+.site-info {
+  margin-left: 100px;
+  width: 600px;
+  font-size: 50px;
+  color: white;
+  text-shadow:
+    -6px 4px 0px rgba(0, 0, 0, 1),
+    0px 1px 10px rgba(0, 0, 0, 1),
+    -6px 6px 0px rgba(0, 0, 0, 1);
+}
+
+.join-today {
+  margin-left: 100px;
+  width: 600px;
+  background-color: rgb(0, 0, 0);
+  padding: 5px;
+  font-size: 20px;
+  ;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.get-app {
+  margin-top: 50px;
+  margin-left: 100px;
+  font-size: 20px;
+  color: rgb(224, 221, 221);
+}
+
+.app-logos {
+  margin-top: 25px;
+  margin-left: 100px;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.app-logo {
+  height: 40px;
+}
+
+.apple-logo {
+  height: 28px !important;
+}
+
+
+.ease-enter {
+  opacity: 0;
+}
+
+.ease-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ease-exit {
+  opacity: 1;
+}
+
+.ease-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+
