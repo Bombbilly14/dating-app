@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
-
+import './styles/SignIn.css'
 function SignIn({setUser}) {
     const [email, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -30,38 +30,36 @@ function SignIn({setUser}) {
     }
 
 
-  return (
-    <div className="sign-in-form">
-
-    <>
-    {error && <p className="error-message">{error}</p>}
-    <form onSubmit={login}>
-        <label htmlFor="signInName"></label>
-        <input
-        id="signInName"
-        value={email}
-        onChange={ e => setUsername(e.target.value)}
-        placeholder="Email"/>
-        
-        <br />
-        <label htmlFor="signInPassword"></label>
-        <input
-        type="password"
-        id="signInPassword"
-        value ={password}
-        onChange={ (e) => setPassword(e.target.value)}
-        placeholder="Password"
-         />
-         <br/>
-         <div className="button-container">
-        <input className="inputCreate"type= "submit" value="Sign In"  />
+    return (
+      <div className="login-page">
+        <div className="sign-in-container">
+          <h4>Welcome back!</h4>
+          {error && <p className="error-message">{error}</p>}
+          <form onSubmit={login}>
+            <input
+              id="signInName"
+              value={email}
+              onChange={ e => setUsername(e.target.value)}
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              id="signInPassword"
+              value ={password}
+              onChange={ (e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <div className="button-container">
+              <input className="inputCreate" type= "submit" value="Sign In"  />
+            </div>
+          </form>
+          <p>Not a member? <a href="">Create a profile </a></p>
         </div>
-    </form>
-    </>
-
-
-    </div>
-  )
+      </div>
+    )
+    
+    
+    
 }
 
 export default SignIn

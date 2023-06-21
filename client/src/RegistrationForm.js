@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import GenderPreferenceForm from './GenderPreferenceForm';
 import './styles/RegistrationForm.css';
+import logoNoback from './images/logonobackground.png';
 
-function RegistrationForm({ setUser }) {
+function RegistrationForm({ setUser, closeForm }) {
   const [name, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +18,7 @@ function RegistrationForm({ setUser }) {
   const [question2, setQuestion2] = useState('');
   const [question3, setQuestion3] = useState('');
   const [gender, setGender] = useState('');
+  const [genderPreference, setGenderPreference] = useState([]);
   const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
@@ -41,7 +44,7 @@ function RegistrationForm({ setUser }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, password, gender, age }),
+      body: JSON.stringify({ name, email, password, gender, age, gender_preference: genderPreference }),
     })
       .then(r => r.json())
       .then((data) => {
@@ -56,12 +59,13 @@ function RegistrationForm({ setUser }) {
   return (
     <>
       {message && <p>{message}</p>}
-      <div className="container">
+      <div className="registration-container">
         {showForm && (
-          <div className="content" onAnimationEnd={() => setShowForm(false)}>
-
+          <div className="registration-content" onAnimationEnd={() => setShowForm(false)}>
+            <button className="inputBack" onClick={closeForm}>X</button>
             <form onSubmit={handleFormSubmit}>
-              <div>
+              <div className="input-wrapper">
+                <h4 style={{ textAlign: 'center' }}>Start Free Today!</h4>
                 <label htmlFor="name">Name:</label>
                 <input
                   id="name"
@@ -70,7 +74,7 @@ function RegistrationForm({ setUser }) {
                   placeholder="Name"
                 />
               </div>
-              <div>
+              <div className="input-wrapper">
                 <label htmlFor="email">Email:</label>
                 <input
                   id="email"
@@ -79,7 +83,7 @@ function RegistrationForm({ setUser }) {
                   placeholder="Email"
                 />
               </div>
-              <div>
+              <div className="input-wrapper">
                 <label htmlFor="password">Password:</label>
                 <input
                   type="password"
@@ -89,7 +93,7 @@ function RegistrationForm({ setUser }) {
                   placeholder="Password"
                 />
               </div>
-              <div>
+              <div className="input-wrapper">
                 <label htmlFor="confirm-password">Confirm Password:</label>
                 <input
                   type="password"
@@ -99,18 +103,22 @@ function RegistrationForm({ setUser }) {
                   placeholder="Confirm Password"
                 />
               </div>
-              <div>
+              <div className="input-wrapper">
                 <label htmlFor="age">Age:</label>
-                <input
+                <select
                   id="age"
-                  type="number"
-                  placeholder="Age"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                />
+                >
+                  {[...Array(82)].map((e, i) =>
+                    <option key={i + 18} value={i + 18}>{i + 18}</option>
+                  )}
+                </select>
               </div>
               <div className="button-container">
-                <input className="inputCreate" type="submit" value="Create Profile" />
+                <input className="inputCreate" type="submit" value="Next" />
+                <hr></hr>
+
               </div>
             </form>
           </div>
@@ -127,55 +135,14 @@ function RegistrationForm({ setUser }) {
           </h2>
         )}
         {showQuestions && (
-          <div className="content">
-            <form onSubmit={createAccount}>
-              <div>
-                <label htmlFor="gender">Gender Pronouns:</label>
-                <select
-                  id="gender"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  required
-                >
-                  <option value="">Select Pronouns</option>
-                  <option value="He/Him">He/Him</option>
-                  <option value="She/Her">She/Her</option>
-                  <option value="They/Them">They/Them</option>
-                  <option value="Other">Other</option>
-                </select>
-
-              </div>
-              <div>
-                <label htmlFor="question1">Question 1:</label>
-                <input
-                  id="question1"
-                  placeholder="Question 1"
-                  value={question1}
-                  onChange={(e) => setQuestion1(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="question2">Question 2:</label>
-                <input
-                  id="question2"
-                  placeholder="Question 2"
-                  value={question2}
-                  onChange={(e) => setQuestion2(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="question3">Question 3:</label>
-                <input
-                  id="question3"
-                  placeholder="Question 3"
-                  value={question3}
-                  onChange={(e) => setQuestion3(e.target.value)}
-                />
-              </div>
-              <div className="button-container">
-                <input className="inputCreate" type="submit" value="Submit" />
-              </div>
-            </form>
+          <div className="registration-content">
+            <GenderPreferenceForm
+              gender={gender}
+              setGender={setGender}
+              genderPreference={genderPreference}
+              setGenderPreference={setGenderPreference}
+              createAccount={createAccount}
+            />
           </div>
 
         )}

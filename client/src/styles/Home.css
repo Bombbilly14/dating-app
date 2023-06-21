@@ -91,7 +91,7 @@
     justify-content: center;
     text-align: center;
   }
-  .custom-loader {
+  /* .custom-loader {
     
     width: 120px;
     height: 120px;
@@ -104,7 +104,7 @@
     -webkit-mask-size: 50% 50%;
     -webkit-mask-repeat: no-repeat;
     animation: p9 2.4s infinite linear;
-  }
+  } */
   
   @keyframes p9 {
     90%,100% {background-size:100% 100%}

@@ -26,5 +26,10 @@ class User < ApplicationRecord
     Connection.where(recipient_id: self.id, accepted: nil)
   end
 
+  def self.filter_by_preference(gender:, preference:)
+    where(gender: preference).where("'gender_preference' @> ARRAY[?]", gender)
+  end
+  
+
     has_secure_password
 end
