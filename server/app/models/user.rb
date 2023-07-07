@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
     default_avatar = Avatar.new
     image = MiniMagick::Image.open(Rails.root.join("app/assets/dating-app-logo.jpg"))
-    image.resize "200x250"
+    image.resize "250x250"
     default_avatar.img.attach(io: StringIO.new(image.to_blob), filename: "default_avatar.jpg")
     self.avatar = default_avatar
   end

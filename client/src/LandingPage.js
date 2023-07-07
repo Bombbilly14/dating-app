@@ -7,6 +7,7 @@ import Footer from './Footer';
 import SignIn from './SignIn';
 import RegistrationForm from './RegistrationForm';
 import { CSSTransition } from 'react-transition-group';
+import logonobackground from './images/logonobackground.png';
 
 const LandingPage = ({ user, setUser }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ const LandingPage = ({ user, setUser }) => {
           <>
             <header className="top-bar">
               <p className="logo">Dates by Ruby</p>
+              {/* <img src={logonobackground} alt='logo'/> */}
               {!user ? (
                 <div className="login" onClick={handleLoginClick}>
                   Log In
