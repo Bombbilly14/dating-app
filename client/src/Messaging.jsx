@@ -11,20 +11,41 @@ import './styles/Messaging.css'
 import moment from 'moment';
 
 
-function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
+function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messages, handleSubmit }) {
 
   const messagesEndRef = useRef(null);
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const otherUsers = matches.filter(user => user.id !== me.id);
+  const otherUsers = matches
+    .filter(user => user.id !== me.id)
+    .sort((a, b) => {
+      const aLastMessageTime = a.sent_messages.length > 0
+        ? new Date(a.sent_messages[a.sent_messages.length - 1].created_at).getTime()
+        : 0;
+      const bLastMessageTime = b.sent_messages.length > 0
+        ? new Date(b.sent_messages[b.sent_messages.length - 1].created_at).getTime()
+        : 0;
+
+      return bLastMessageTime - aLastMessageTime;
+    });
+
+  console.log(otherUsers)
+
+  useEffect(() => {
+    if (!isLoading && otherUsers.length > 0) {
+      // Trigger a click on the most recent user
+      handleUserClick(otherUsers[0].id);
+    }
+  }, [isLoading]);
+
   return (
-    <MDBContainer fluid="true" className="py-5 gradient-custom" style={{ maxWidth: '75%', marginLeft: 10, }}>
+    <MDBContainer fluid="true" className="gradient-custom messaging-container" style={{ maxWidth: '75%', marginTop: 5 }}>
       <MDBRow>
-        <MDBCol md="6" lg="5" xl="4" className="mb-4 mb-md-0" >
-          <MDBCard className="mask-custom">
-            <MDBCardBody className='card-body'>
+        <MDBCol md="4" lg="4" xl="4" className="user-list" >
+          <div className="mask-custom">
+            <div className='avatar-body'>
               <MDBTypography listUnStyled className="mb-0">
                 {otherUsers.map((match) => (
                   <li
@@ -64,14 +85,30 @@ function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
                   </li>
                 ))}
               </MDBTypography>
-            </MDBCardBody>
-          </MDBCard>
+            </div>
+          </div>
         </MDBCol>
 
 
 
-        <MDBCol md="6" lg="7" xl="8">
+        <MDBCol md="8" lg="8" xl="8" className='message-parent'>
+          {currentUser && (
+            <div className="current-user-info">
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img
+                  src={currentUser.avatar.img}
+                  alt="avatar"
+                  className="rounded-circle align-self-start me-3 shadow-1-strong"
+                  width="60"
+                  style={{ height: "100%", marginLeft: '10px' }}
+                />
+                <p className="fw-bold mb-0" style={{ color: 'black', marginLeft: '10px' }}>{currentUser.name}</p>
+              </div>
+            </div>
+          )}
+
           <div className="message-container">
+
             <div className="message-box">
               {messages.map((message) => {
 
@@ -80,7 +117,7 @@ function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
                 const senderName = sender ? sender.name : null;
                 const senderAvatar = sender ? sender.avatar.img : null;
                 const recipientName = recipient ? recipient.name : null;
-           
+
 
                 const user = message.sender_id === me.id ? "You" :
                   message.sender_id === recipient.id ? recipientName : senderName;
@@ -118,9 +155,9 @@ function Messaging({ matches, handleUserClick, me, messages, handleSubmit }) {
             </div>
             <form onSubmit={handleSubmit} className="form-message">
               <div className="input-container">
-                <input className="message-input" type="text" name="message" />
+                <input className="message-input" type="text" name="message" autoComplete="off" placeholder="Type your message here..." />
                 <button type="submit" className="send-button">
-                  send
+                  Send
                 </button>
               </div>
             </form>

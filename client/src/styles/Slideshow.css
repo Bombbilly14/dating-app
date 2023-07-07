@@ -7,4 +7,5 @@
   height: 70vh;
   opacity: 1;
   transition: opacity 4s ease-in-out;
+  z-index: 0;
 }

@@ -10,6 +10,9 @@ function ChatPage({me}) {
     const [recipientId, setRecipientId] = useState(null);
     const [matches, setMatches] = useState([])
     const [messages, setMessages] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [currentUser, setCurrentUser] = useState(null);
+
     const user = me
     //too late to go back now, user is always me :(
 
@@ -80,23 +83,27 @@ const handleSubmit = async (e) => {
 
     useEffect(() => {
 
+      setIsLoading(true);
         fetch("/users")
           .then((res) => res.json())
           .then((data) => {
 
             setMatches(data);
+            setIsLoading(false)
           });
       }, []);
 
-    const handleUserClick = (id) => {
+      const handleUserClick = (id) => {
+        const selectedUser = matches.find(user => user.id === id);
         setRecipientId(id);
-        console.log(`This is recipients ID: ${recipientId}`)
+        setCurrentUser(selectedUser);
       };
+      
 
 
       return (
         <div>
-            <Messaging matches={matches} handleUserClick={handleUserClick} messages={messages} me={me} handleSubmit={handleSubmit}/>
+            <Messaging currentUser={currentUser} matches={matches} isLoading={isLoading} handleUserClick={handleUserClick} messages={messages} me={me} handleSubmit={handleSubmit}/>
         </div>
     );
 }

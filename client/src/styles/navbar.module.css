@@ -7,14 +7,14 @@
     position: fixed;
     z-index: 2;
 }
-/* .sidenavClosed {
+.sidenavClosed {
 
     transition: width 0.2s ease-in-out;
     width: 60px;
     z-index: 2;
     position: fixed;
     
-} */
+}
 
 .sideitem {
     display: flex;
@@ -37,7 +37,7 @@
 }
 
 .sideitem:hover {
-    background-color: #A817B5;
+    background-color: #670070;
     color: white
 
 }
@@ -50,6 +50,10 @@
     border: none;
     cursor: pointer;
     padding-left: 20px;
+}
+
+.nav-logo {
+    height: 75px !important;
 }
 
 

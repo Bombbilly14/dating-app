@@ -15,6 +15,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { NavLink } from "react-router-dom"
 import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
+import logonobackground from './images/logonobackground.png';
 
 
 
@@ -41,29 +42,13 @@ export default function NavBar({me}) {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundImage: 'linear-gradient( 111.4deg, rgba(27,24,113,1) 6.5%, rgba(100,43,115,1) 93.2% )', color: 'red', borderRadius: '10px'}}>
+    <AppBar position="static" sx={{backgroundColor: 'rgba(33, 33, 33, 0.7)', color: 'red'}}>
+
 
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-          <DiamondIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-             />
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Dates with Ruby
-          </Typography> */}
+          <img className={styles['nav-logo']} alt='logo' src={logonobackground}/>
+        
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton

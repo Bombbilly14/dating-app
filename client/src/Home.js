@@ -8,6 +8,7 @@ function Home({ me }) {
   const [originalUsers, setOriginalUsers] = useState([]);
   const [selectedAgeRange, setSelectedAgeRange] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (me) {
@@ -24,6 +25,19 @@ function Home({ me }) {
       }, 1900);
     }
   }, [me]);
+
+
+  const handlePrevClick = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentIndex < otherUsers.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
   const filterUsersByAge = (ageRange) => {
     const originalUsers = allUsers.slice();
@@ -54,26 +68,24 @@ function Home({ me }) {
     console.log(`Match ${match.id} was ${interested ? 'liked' : 'disliked'}.`);
     //send a request to the server to indicate interest or decline
   };
+  const user = otherUsers[currentIndex];
 
   return (
+    <div className="main-container">
     <div className="home-wrapper">
-      {/* may want to delete custom loader in favor of smooth transitions via css transition */}
       {isLoading ? (
         <div className="custom-loader-wrapper">
-
           <div className="custom-loader"></div>
-          <h2 className="loading-text" style={{fontStyle: 'italic'}} >Your match, a click away</h2>
+          <h2 className="loading-text" style={{fontStyle: 'italic'}}>Your match, a click away</h2>
         </div>
       ) : (
-
         <div className="card-container">
-
-          {otherUsers.map((match, index) => (
-            <CardComponent match={match} key={index} me={me} handleInterest={handleInterest} allUsers={allUsers} />
+          {otherUsers.map((user, index) => (
+            <CardComponent key={index} user={user} me={me} handleInterest={handleInterest} />
           ))}
         </div>
-
       )}
+    </div>
     </div>
   );
 }

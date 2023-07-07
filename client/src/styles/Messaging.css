@@ -1,9 +1,25 @@
 .card-body {
-  max-height: 65vh;
+  max-height: 73vh;
   overflow-y: auto;
+  
+  
 
 }
+.avatar-body {
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px !important;
+  width: 95%;
+  background-color: #FFF;
+  margin-left: 10px;
+  
 
+}
+.mask-custom {
+  background-color: #EEE;
+  margin-top: 10px;
+
+}
 .message-card {
   max-width: 35%;
 }
@@ -40,14 +56,24 @@
   align-self: flex-end;
 }
 
-.message-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.messaging-container {
+  background-color: #EEE;
+  border: 1px solid #CCC;
+  border-radius: 10px;
+  padding-bottom: 0px !important;
 }
 
+.user-list {
+  border-radius: 10px;
+  background-color: #EEE;
+  padding-right: 0px !important;
+  padding-left: 10px !important;
+  
+}
+
+
 .message-box {
-  background-color: rgb(199, 199, 199);
+  background-color: #EEE;
   width: 100%;
   border-radius: 10px;
   overflow-y: auto;
@@ -55,26 +81,123 @@
   height: 70vh;
 }
 
+.form-message {
+  background-color: #FFF;
+  /* padding: 10px; */
+  border-top: 1px solid #CCC;
+  border-radius: 10px;
+  width: 95%;
+}
+
+
+
 .input-container {
   display: flex;
   justify-content: space-between;
-  margin-right: 20px;
+  margin-bottom: 5px;
+
 
 }
 
 .message-input {
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 10px;
   border: none;
   width: 90vh;
+
+}
+
+.message-input:focus {
+  border: none;
+  outline: none;
 }
 
 
-
+.send-button {
+  font-size: 12px;
+  padding: 10px 15px;
+  position: relative;
+  border-radius: 3px;
+  border: 1px white;
+  color: rgb(255, 255, 255);
+  background-color: #b802b8;
+}
 .send-button:hover {
-  color: #0056b3;
+  background-color: #76017a;
 }
 .message-time {
   text-align: right;
-  font-size: 0.8em;
-  color: grey;
+  font-size: 0.7em;
+  color: rgba(128, 128, 128, 0.719);
+}
+
+.message-parent {
+  padding: 0px !important;
+}
+
+
+/* scroll bars on message and user boxes */
+.message-box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.message-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.message-box::-webkit-scrollbar-thumb {
+  background: #b802b8;
+  border-radius: 4px;
+}
+
+.message-box::-webkit-scrollbar-thumb:hover {
+  background: #76017a;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.card-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background: #b802b8;
+  border-radius: 4px;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+  background: #76017a;
+}
+
+
+.current-user-info {
+  background-color: #FFF;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 8px 5px;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+
+.avatar-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.avatar-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.avatar-body::-webkit-scrollbar-thumb {
+  background: #b802b8;
+  border-radius: 4px;
+}
+
+.avatar-body::-webkit-scrollbar-thumb:hover {
+  background: #76017a;
 }

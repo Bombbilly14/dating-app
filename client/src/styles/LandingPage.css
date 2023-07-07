@@ -1,8 +1,9 @@
 .landing-page {
   text-align: left;
-  height: 100vh;
+  height: 90vh;
   background-color: rgba(128, 0, 128, 0.76);
   background-image: linear-gradient(rgba(153, 0, 94, 0.747), rgb(39, 0, 39));
+  
 }
 
 .intro-content {
@@ -20,8 +21,11 @@
   margin-left: 100px;
   height: 50px;
   font-style: italic;
-  font-size: 25px;
+  font-size: 50px;
   color: rgb(224, 221, 221);
+  font-family: 'Brush Script MT';
+  color:rgb(255, 255, 255)
+  
 }
 
 .login {

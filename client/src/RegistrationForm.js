@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GenderPreferenceForm from './GenderPreferenceForm';
 import './styles/RegistrationForm.css';
-import logoNoback from './images/logonobackground.png';
+// import logoNoback from './images/logonobackground.png';
 
 function RegistrationForm({ setUser, closeForm }) {
   const [name, setUsername] = useState('');
@@ -14,9 +14,9 @@ function RegistrationForm({ setUser, closeForm }) {
   const [showForm, setShowForm] = useState(true);
   const [showTitle, setShowTitle] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
-  const [question1, setQuestion1] = useState('');
-  const [question2, setQuestion2] = useState('');
-  const [question3, setQuestion3] = useState('');
+  // const [question1, setQuestion1] = useState('');
+  // const [question2, setQuestion2] = useState('');
+  // const [question3, setQuestion3] = useState('');
   const [gender, setGender] = useState('');
   const [genderPreference, setGenderPreference] = useState([]);
   const navigate = useNavigate();
@@ -66,35 +66,38 @@ function RegistrationForm({ setUser, closeForm }) {
             <form onSubmit={handleFormSubmit}>
               <div className="input-wrapper">
                 <h4 style={{ textAlign: 'center' }}>Start Free Today!</h4>
-                <label htmlFor="name">Name:</label>
+                <label htmlFor="name">Name*:</label>
                 <input
                   id="name"
                   value={name}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Name"
+                  required
                 />
               </div>
               <div className="input-wrapper">
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">Email*:</label>
                 <input
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
+                  required
                 />
               </div>
               <div className="input-wrapper">
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Password*:</label>
                 <input
                   type="password"
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
+                  required
                 />
               </div>
               <div className="input-wrapper">
-                <label htmlFor="confirm-password">Confirm Password:</label>
+                <label htmlFor="confirm-password">Confirm Password*:</label>
                 <input
                   type="password"
                   id="confirm-password"
@@ -104,7 +107,7 @@ function RegistrationForm({ setUser, closeForm }) {
                 />
               </div>
               <div className="input-wrapper">
-                <label htmlFor="age">Age:</label>
+                <label htmlFor="age">Age*:</label>
                 <select
                   id="age"
                   value={age}
@@ -135,7 +138,7 @@ function RegistrationForm({ setUser, closeForm }) {
           </h2>
         )}
         {showQuestions && (
-          <div className="registration-content">
+          <div className="gender-content">
             <GenderPreferenceForm
               gender={gender}
               setGender={setGender}
