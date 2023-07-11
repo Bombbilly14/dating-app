@@ -5,10 +5,8 @@ import CardComponent from './CardComponent';
 function Home({ me }) {
   const [allUsers, setAllUsers] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
-  const [originalUsers, setOriginalUsers] = useState([]);
-  const [selectedAgeRange, setSelectedAgeRange] = useState('');
+  // const [selectedAgeRange, setSelectedAgeRange] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (me) {
@@ -19,7 +17,6 @@ function Home({ me }) {
             setAllUsers(data);
             const filterMe = data.filter(user => user.id !== me.id);
             setOtherUsers(filterMe);
-            setOriginalUsers(filterMe);
             setIsLoading(false);
           });
       }, 1900);
@@ -27,17 +24,7 @@ function Home({ me }) {
   }, [me]);
 
 
-  const handlePrevClick = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
 
-  const handleNextClick = () => {
-    if (currentIndex < otherUsers.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
 
   const filterUsersByAge = (ageRange) => {
     const originalUsers = allUsers.slice();
@@ -58,17 +45,16 @@ function Home({ me }) {
     setAllUsers(filteredUsers);
   }
 
-  const handleAgeRangeChange = (event) => {
-    setSelectedAgeRange(event.target.value);
-    filterUsersByAge(event.target.value);
-  }
+  // const handleAgeRangeChange = (event) => {
+  //   setSelectedAgeRange(event.target.value);
+  //   filterUsersByAge(event.target.value);
+  // }
 
   const handleInterest = (match, interested) => {
     // send interest or decline match based on button click
     console.log(`Match ${match.id} was ${interested ? 'liked' : 'disliked'}.`);
     //send a request to the server to indicate interest or decline
   };
-  const user = otherUsers[currentIndex];
 
   return (
     <div className="main-container">
