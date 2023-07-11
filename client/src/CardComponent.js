@@ -12,15 +12,16 @@ function CardComponent({ user, me, handleInterest }) {
   };
 
   return (
-    <div className="card">
-      <img src={user.avatar.img} alt={user.id} />
-      <h2>{user.name}, {user.age}</h2>
-      <p>{user.location}</p>
-      <p>{user.bio}</p>
-      <p>{user.gender}</p>
-      <div className="card-actions">
-        <Button color="red" icon="close" content="No" onClick={handleDislikeClick} />
-        <Button color="green" icon="check" content="Yes" onClick={handleLikeClick} />
+    <div className="card-profile" style={{ backgroundImage: `url(${user.avatar.img})` }}>
+      <div className="card-profile-content">
+        <h2>{user.name}, {user.age}</h2>
+        <p>{user.location}</p>
+        <p>{user.bio}</p>
+        <p>{user.gender}</p>
+        <div className="card-actions">
+          <Button color="red" icon="close" content="No" onClick={handleDislikeClick} />
+          <Button color="green" icon="check" content="Yes" onClick={handleLikeClick} />
+        </div>
       </div>
     </div>
   );

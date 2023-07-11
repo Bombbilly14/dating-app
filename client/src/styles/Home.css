@@ -10,29 +10,42 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
+  padding: 8px;
   overflow-y: auto;
-  max-height: 100%;
+  
 }
 
-.card {
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  padding: 16px;
+.card-profile {
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 20vw;
+  min-height: 400px;
 }
 
-.card img {
+
+.card-profile-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
+  padding: 8px;
+  color: white;
 }
 
-.card h2 {
-  margin: 16px 0;
+.card-profile-content {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
-
+.card-profile-content h2,
+.card-profile-content p {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 .card-actions {
   display: flex;
   justify-content: space-between;
