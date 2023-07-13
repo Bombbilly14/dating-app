@@ -10,14 +10,15 @@ class UsersController < ApplicationController
     end
 
     def index
-        if params[:gender] && params[:preference]
-          @users = User.filter_by_preference(gender: params[:gender], preference: params[:preference])
-        else
-          @users = User.all
-        end
-        render json: @users
+      if params[:gender] && params[:gender_preference]
+        @users = User.filter_by_preference(current_user_id: current_user.id, gender: params[:gender], gender_preference: params[:gender_preference])
+      else
+        @users = User.all
+      end
+      @users = @users.where.not(id: current_user.connected_users.pluck(:id)) if current_user.present?
+      render json: @users
     end
-      
+
 
     def show
         user = find_user
