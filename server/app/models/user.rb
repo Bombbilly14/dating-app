@@ -26,10 +26,20 @@ class User < ApplicationRecord
     Connection.where(recipient_id: self.id, accepted: nil)
   end
 
-  def self.filter_by_preference(gender:, preference:)
-    where(gender: preference).where("'gender_preference' @> ARRAY[?]", gender)
-  end
+  def self.filter_by_preference(current_user_id:, gender:, gender_preference:)
+    where(gender: gender_preference).where.not(id: User.find(current_user_id).connected_users.pluck(:id), gender: gender)
+end
+
+
+
   
 
+  def all_connections
+    Connection.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+  end
+
+  def connected_users
+    all_connections.map { |connection| connection.sender_id == self.id ? connection.recipient : connection.sender }
+  end
     has_secure_password
 end

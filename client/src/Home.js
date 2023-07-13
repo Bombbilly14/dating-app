@@ -5,13 +5,14 @@ import CardComponent from './CardComponent';
 function Home({ me }) {
   const [allUsers, setAllUsers] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
-  // const [selectedAgeRange, setSelectedAgeRange] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [connectionStatus, setConnectionStatus] = useState(null);
 
   useEffect(() => {
     if (me) {
       setTimeout(() => {
-        fetch('/users')
+        let genderPreferenceQuery = me.gender_preference.map(pref => `gender_preference[]=${pref}`).join('&');
+        fetch(`/users?gender=${me.gender}&${genderPreferenceQuery}`)
           .then((response) => response.json())
           .then((data) => {
             setAllUsers(data);
@@ -23,37 +24,40 @@ function Home({ me }) {
     }
   }, [me]);
 
+  const handleClick = (user) => {
+    fetch("/connections", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        sender_id: me.id,
+        recipient_id: user.id
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          setConnectionStatus('repeated')
+          setTimeout(() => {
+            setConnectionStatus(null);
+          }, 4000);
+          throw new Error("Failed to create connection")
 
+        }
+        return response.json();
+      })
+      .then(connection => {
+        console.log("Connection created:", connection);
+        setConnectionStatus(connection && connection.accepted === true ? 'true' : 'null');
 
+        setTimeout(() => {
+          setConnectionStatus(null);
+        }, 4000);
 
-  const filterUsersByAge = (ageRange) => {
-    const originalUsers = allUsers.slice();
-    const filteredUsers = originalUsers.filter(user => {
-      const userAge = Number(user.age);
-      console.log('userAge:', userAge, 'ageRange:', ageRange);
-      switch (ageRange) {
-        case '18+':
-          return userAge >= 18;
-        case '25+':
-          return userAge >= 25;
-        case '35+':
-          return userAge >= 35;
-        default:
-          return true;
-      }
-    }).filter(user => user.id !== me.id);;
-    setAllUsers(filteredUsers);
-  }
-
-  // const handleAgeRangeChange = (event) => {
-  //   setSelectedAgeRange(event.target.value);
-  //   filterUsersByAge(event.target.value);
-  // }
-
-  const handleInterest = (match, interested) => {
-    // send interest or decline match based on button click
-    console.log(`Match ${match.id} was ${interested ? 'liked' : 'disliked'}.`);
-    //send a request to the server to indicate interest or decline
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   return (
@@ -67,7 +71,7 @@ function Home({ me }) {
       ) : (
         <div className="card-container">
           {otherUsers.map((user, index) => (
-            <CardComponent key={index} user={user} me={me} handleInterest={handleInterest} />
+            <CardComponent key={index} user={user} me={me} handleClick={handleClick}/>
           ))}
         </div>
       )}
