@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def self.filter_by_preference(current_user_id:, gender:, gender_preference:)
     where(gender: gender_preference).where.not(id: User.find(current_user_id).connected_users.pluck(:id), gender: gender)
-end
+  end
 
 
 

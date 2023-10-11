@@ -1,18 +1,15 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :update, :destroy]
 
-  # GET /messages
   def index
     @messages = Message.where("(sender_id = ? AND recipient_id = ?) OR (sender_id = ? AND recipient_id = ?)", current_user.id, params[:recipient_id], params[:recipient_id], current_user.id)
     render json: @messages
   end
 
-  # GET /messages/1
   def show
     render json: @message
   end
 
-  # POST /messages
   def create
     @message = Message.new(message_params)
     @message.sender_id = current_user.id
@@ -26,7 +23,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
       render json: @message
@@ -35,19 +31,16 @@ class MessagesController < ApplicationController
     end
   end
 
-  # DELETE /messages/1
   def destroy
     @message.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_message
       @message = Message.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def message_params
-      params.require(:message).permit(:body, :recipient_id, :sender_id)
+      params.require(:message).permit(:body, :recipient_id, :id)
     end
 end

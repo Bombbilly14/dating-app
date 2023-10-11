@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './styles/Profile.css'
 import 'react-image-crop/dist/ReactCrop.css';
 
-import {  MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 
-function MyProfile({ user , setUser}) {
+function MyProfile({ user, setUser }) {
   const [editing, setEditing] = useState(false);
   const [bio, setBio] = useState("")
   const [location, setLocation] = useState("")
@@ -39,7 +39,7 @@ function MyProfile({ user , setUser}) {
     event.preventDefault();
     setEditing(false);
 
-    const formData =  new FormData()
+    const formData = new FormData()
     formData.append('bio', bio)
     formData.append('location', location)
     formData.append('age', age)
@@ -48,7 +48,7 @@ function MyProfile({ user , setUser}) {
 
 
     try {
-     
+
       const response = await fetch(`/users/${user.id}`, {
         method: "PATCH",
         body: formData
@@ -77,10 +77,10 @@ function MyProfile({ user , setUser}) {
       method: 'PATCH',
       body: fileData
     })
-    
+
     const data = await response.json()
     setUser(data)
-    
+
 
   }
 
@@ -96,7 +96,7 @@ function MyProfile({ user , setUser}) {
           throw new Error('Failed to delete user');
         }
         setUser(null)
-        
+
       } catch (error) {
         console.log(error);
       }
@@ -115,23 +115,23 @@ function MyProfile({ user , setUser}) {
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                   {user?.avatar ? <MDBCardImage src={user.avatar.img}
                     alt="Generic placeholder image" className="mt-4 mb-2" style={{ zIndex: '1' }} /> : null}
-                    {editingAvatar || editing ? null : (
-                      <div style={{ display: 'flex' }}>
-                        <MDBBtn onClick={handleEditClick} outline color="dark" style={{height: '36px', overflow: 'visible'}}>
+                  {editingAvatar || editing ? null : (
+                    <div style={{ display: 'flex' }}>
+                      <MDBBtn onClick={handleEditClick} outline color="dark" style={{ height: '36px', overflow: 'visible' }}>
                         Edit&nbsp;profile
-                        </MDBBtn>
-                        
-                          <MDBBtn onClick={handleAvatarEditClick} outline color="dark" style={{ height: '36px', overflow: 'visible', width: '1000px' }}>
-                           Edit&nbsp;avatar
-                          </MDBBtn>
-                        
+                      </MDBBtn>
+
+                      <MDBBtn onClick={handleAvatarEditClick} outline color="dark" style={{ height: '36px', overflow: 'visible', width: '1000px' }}>
+                        Edit&nbsp;avatar
+                      </MDBBtn>
+
                     </div>
-                    )}
-                    
+                  )}
+
                 </div>
-                
-                  
-                
+
+
+
                 <div className="ms-3" style={{ marginTop: '130px' }}>
                   <MDBTypography tag="h5">{user.name}</MDBTypography>
                   <MDBCardText></MDBCardText>
@@ -139,9 +139,9 @@ function MyProfile({ user , setUser}) {
               </div>
               <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                 <div className="d-flex justify-content-end text-center py-1">
-                  
-                  
-                  
+
+
+
                 </div>
               </div>
               <MDBCardBody className="text-black p-4">
@@ -155,78 +155,82 @@ function MyProfile({ user , setUser}) {
                   </div>
                 </div>
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                 
+
                 </div>
-               
+
               </MDBCardBody>
               {editing ? (
                 <>
-                <MDBCardText className="lead fw-normal mb-0">Edit profile</MDBCardText>
-          <form onSubmit={handleSubmit}>
-             <label htmlFor="bio"></label>
-           <input
-             id="bio"
-             value={bio}
-             onChange={ e => setBio(e.target.value)}
-             placeholder="Bio"/>
-             <br />
-             <label htmlFor="location"></label>
-             <input
-              id="location"
-              value={location}
-              onChange={ e => setLocation(e.target.value)}
-              placeholder="Location"/>
-             <br />
-             <label htmlFor="age"></label>
-             <input
-              type="number"
-              id="age"
-              value ={age}
-              onChange={ (e) => setAge(e.target.value)}
-              placeholder="age"
-              />
-            <br />
+                  <MDBCardText className="lead fw-normal mb-0" style={{ marginLeft: '10px' }} >Edit profile</MDBCardText>
+                  <form onSubmit={handleSubmit} style={{ marginLeft: '10px' }}>
+                    <label htmlFor="bio"></label>
+                    <input
+                      id="bio"
+                      value={bio}
+                      onChange={e => setBio(e.target.value)}
+                      placeholder="Bio" />
+                    <br />
+                    <label htmlFor="location"></label>
+                    <input
+                      id="location"
+                      value={location}
+                      onChange={e => setLocation(e.target.value)}
+                      placeholder="Location" />
+                    <br />
+                    <label htmlFor="age"></label>
+                    <select
+                      id="age"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                    >
+                      <option value="">Select Age</option>
+                      {[...Array(82)].map((_, index) => (
+                        <option key={index} value={index + 18}>
+                          {index + 18}
+                        </option>
+                      ))}
+                    </select>
 
-            <div className="button-container">
-              <MDBBtn className="cancel-button" type="button" onClick={handleCancelClick}>
-                Cancel
-              </MDBBtn>
-              <MDBBtn type="submit" >
-                Save
-              </MDBBtn>
+                    <div className="button-container">
+                      <MDBBtn className="cancel-button" type="button" onClick={handleCancelClick}>
+                        Cancel
+                      </MDBBtn>
+                      <MDBBtn type="submit" >
+                        Save
+                      </MDBBtn>
 
-            </div>
-          </form>
-        
-        </>
-      ) : editingAvatar ? (
-        <>
-        <MDBCardText className="lead fw-normal mb-0">Edit Avatar</MDBCardText>
-          <form onSubmit={handleFileSubmit}>
-            <label htmlFor="avatar"></label>
-            <input
-            type="file"
-            accept="image/*"
-            id="avatar"
-            
-            onChange={handleFileChange}
-            />
-            <br />
-            <MDBBtn  type="button" onClick={handleCancelAvatarClick}>
-                Cancel
-              </MDBBtn>
-              <MDBBtn type="submit" >
-                Save
-              </MDBBtn>
-          </form>
-        </>
-      ) : (
-        <div className="d-grid gap-2 mb-4">
-        <button className="btn btn-danger" onClick={handleDeleteClick}>
-          Delete account
-        </button>
-        </div>
-      )}
+                    </div>
+                  </form>
+
+                </>
+              ) : editingAvatar ? (
+                <>
+                  <MDBCardText className="lead fw-normal mb-0" style={{ marginLeft: '10px' }}>Edit Avatar</MDBCardText>
+                  <form onSubmit={handleFileSubmit} style={{ marginLeft: '10px', marginBottom: '10px' }}>
+                    <label htmlFor="avatar"></label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      id="avatar"
+
+                      onChange={handleFileChange}
+                    />
+                    <br />
+                    <MDBBtn type="button" onClick={handleCancelAvatarClick}>
+                      Cancel
+                    </MDBBtn>
+                    <MDBBtn type="submit" >
+                      Save
+                    </MDBBtn>
+                  </form>
+                </>
+              ) : (
+                <div className="d-grid gap-2 mb-4">
+                  <button className="btn btn-danger" onClick={handleDeleteClick}>
+                    Delete account
+                  </button>
+                </div>
+              )}
             </MDBCard>
           </MDBCol>
         </MDBRow>

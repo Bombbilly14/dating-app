@@ -7,6 +7,7 @@ function Home({ me }) {
   const [otherUsers, setOtherUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [connectionStatus, setConnectionStatus] = useState(null);
+  const [showMatchMessage, setShowMatchMessage] = useState(false);
 
   useEffect(() => {
     if (me) {
@@ -22,9 +23,10 @@ function Home({ me }) {
           });
       }, 1900);
     }
-  }, [me]);
+  }, [me, connectionStatus]);
 
   const handleClick = (user) => {
+    setShowMatchMessage(true);
     fetch("/connections", {
       method: "POST",
       headers: {
@@ -49,10 +51,10 @@ function Home({ me }) {
       .then(connection => {
         console.log("Connection created:", connection);
         setConnectionStatus(connection && connection.accepted === true ? 'true' : 'null');
-
         setTimeout(() => {
           setConnectionStatus(null);
-        }, 4000);
+          setShowMatchMessage(false); // Hide the match message after 4 seconds
+        }, 2000);
 
       })
       .catch(error => {
@@ -66,12 +68,12 @@ function Home({ me }) {
       {isLoading ? (
         <div className="custom-loader-wrapper">
           <div className="custom-loader"></div>
-          <h2 className="loading-text" style={{fontStyle: 'italic'}}>Your match, a click away</h2>
+          <h2 className="loading-text" style={{fontStyle: 'italic', color: 'white'}}>Your match, a click away</h2>
         </div>
       ) : (
         <div className="card-container">
           {otherUsers.map((user, index) => (
-            <CardComponent key={index} user={user} me={me} handleClick={handleClick}/>
+            <CardComponent key={index} user={user} me={me} handleClick={handleClick} connectionStatus={connectionStatus} setShowMatchMessage={setShowMatchMessage} showMatchMessage={showMatchMessage} />
           ))}
         </div>
       )}

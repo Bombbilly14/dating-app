@@ -35,7 +35,6 @@ function App({cable}) {
 
 
 
-
  return (
   <div className="app-container">
     {me ? <NavBar me={me}/> : null}

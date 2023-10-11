@@ -57,8 +57,9 @@ function RequestedMatch({connection, me, receivedConnections, setReceivedConnect
   
     return (
 
-    <Card.Group>
-    <Card>
+      <div>
+    <Card.Group >
+    <Card className='requested-card'>
       <Card.Content>
         <Image
           floated='right'
@@ -83,6 +84,8 @@ function RequestedMatch({connection, me, receivedConnections, setReceivedConnect
       </Card.Content>
     </Card>
   </Card.Group>
+
+    </div>
     )
 }
 

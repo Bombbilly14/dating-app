@@ -1,0 +1,35 @@
+.matched-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .ui.card.requested-card {
+  
+    margin-left: 50px !important;
+    margin-top: 50px !important;
+
+
+  }
+
+  .separator {
+    border: none;
+    align-self: center;
+    width: 90%;
+    height: 3px !important;
+    background-color: red;
+    margin: 20px auto;
+  }
+
+  .pending-card {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .pending-connections-header {
+    margin-top: 10px;
+    color: white;
+    margin-left: 10px;
+  }

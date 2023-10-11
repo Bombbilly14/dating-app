@@ -19,7 +19,7 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
   }, [messages]);
 
   const otherUsers = matches
-    .filter(user => user.id !== me.id)
+    // .filter(user => user.id !== me.id)
     .sort((a, b) => {
       const aLastMessageTime = a.sent_messages.length > 0
         ? new Date(a.sent_messages[a.sent_messages.length - 1].created_at).getTime()
@@ -31,15 +31,16 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
       return bLastMessageTime - aLastMessageTime;
     });
 
-  console.log(otherUsers)
+  
 
   useEffect(() => {
     if (!isLoading && otherUsers.length > 0) {
       // Trigger a click on the most recent user
       handleUserClick(otherUsers[0].id);
+ 
     }
   }, [isLoading]);
-
+ 
   return (
     <MDBContainer fluid="true" className="gradient-custom messaging-container" style={{ maxWidth: '75%', marginTop: 5 }}>
       <MDBRow>
@@ -47,43 +48,35 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
           <div className="mask-custom">
             <div className='avatar-body'>
               <MDBTypography listUnStyled className="mb-0">
-                {otherUsers.map((match) => (
-                  <li
-                    key={match.id}
-                    className="p-2 border-bottom"
-                    style={{
-                      borderBottom: "1px solid rgba(255,255,255,.3) !important",
-                    }}
-                  >
-                    <a
-                      href="#!"
-                      className="d-flex justify-content-between link-light"
-                      onClick={() => handleUserClick(match.id)}
-                    >
-                      <div className="d-flex flex-row">
-                        <img
-                          src={match.avatar.img}
-                          alt="avatar"
-                          className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
-                          width="60"
-                          style={{ height: "100%", }}
-                        />
-                        <div className="pt-1">
-                          <p className="fw-bold mb-0" style={{ color: 'black' }}>{match.name}</p>
-                          <p className="small" style={{ color: 'black' }}>
-                            {match.sent_messages
-                              .filter(message => message.recipient_id === me.id)
-                              .pop()?.body}
-                          </p>
+              {otherUsers.map((match) => {
+                  const userMatch = match.recipient.id === me.id ? match.sender : match.recipient;
+                  return (
+                    <li key={match.id} className="p-2 border-bottom" style={{ borderBottom: "1px solid rgba(255,255,255,.3) !important" }}>
+                      <a href="#!" className="d-flex justify-content-between link-light" onClick={() => handleUserClick(match.id)}>
+                        <div className="d-flex flex-row">
+                          <img
+                            src={userMatch.avatar_url}
+                            alt="avatar"
+                            className="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
+                            width="60"
+                            style={{ height: "100%" }}
+                          />
+                          <div className="pt-1">
+                            <p className="fw-bold mb-0" style={{ color: 'black' }}>{userMatch.name}</p>
+                            <p className="small" style={{ color: 'black' }}>
+                              {userMatch.sent_messages
+                                .filter(message => message.recipient_id === me.id)
+                                .pop()?.body}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="pt-1">
-                        <p className="small mb-1 text-white">{match.time}</p>
-
-                      </div>
-                    </a>
-                  </li>
-                ))}
+                        <div className="pt-1">
+                          <p className="small mb-1 text-white">{userMatch.time}</p>
+                        </div>
+                      </a>
+                    </li>
+                  );
+                })}
               </MDBTypography>
             </div>
           </div>
@@ -92,17 +85,18 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
 
 
         <MDBCol md="8" lg="8" xl="8" className='message-parent'>
+          
           {currentUser && (
             <div className="current-user-info">
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <img
-                  src={currentUser.avatar.img}
+                 src={currentUser.recipient.id === me.id ? currentUser.sender.avatar_url : currentUser.recipient.avatar_url}
                   alt="avatar"
                   className="rounded-circle align-self-start me-3 shadow-1-strong"
                   width="60"
                   style={{ height: "100%", marginLeft: '10px' }}
                 />
-                <p className="fw-bold mb-0" style={{ color: 'black', marginLeft: '10px' }}>{currentUser.name}</p>
+                <p className="fw-bold mb-0" style={{ color: 'black', marginLeft: '10px' }}>{currentUser.recipient.id === me.id ? currentUser.sender.name : currentUser.recipient.name}</p>
               </div>
             </div>
           )}
@@ -112,15 +106,18 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
             <div className="message-box">
               {messages.map((message) => {
 
-                const sender = matches.find(match => match.id === message.sender_id);
-                const recipient = matches.find(match => match.id === message.recipient_id);
-                const senderName = sender ? sender.name : null;
-                const senderAvatar = sender ? sender.avatar.img : null;
-                const recipientName = recipient ? recipient.name : null;
+                const senderMatch = matches.find(
+                  match => match.sender.id === message.sender_id || match.recipient.id === message.sender_id
+                );
+                const senderAvatar =
+                  senderMatch.sender.id === message.sender_id
+                    ? senderMatch.sender.avatar_url
+                    : senderMatch.recipient.avatar_url;
 
 
-                const user = message.sender_id === me.id ? "You" :
-                  message.sender_id === recipient.id ? recipientName : senderName;
+
+                // const user = message.sender_id === me.id ? "You" :
+                //   message.sender_id === recipient.id ? recipientName : senderName;
                 return (
                   <li key={message.id} className={message.sender_id === me.id ? "my-message" : "other-message"}>
                     {message.sender_id !== me.id && (
