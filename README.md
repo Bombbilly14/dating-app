@@ -4,7 +4,7 @@ Simple dating app made with React and Rails. Used web application frameworks for
 ●	Active Storage for image uploading including work with Mini Magick and Image Processing gems
 ●	Action Cable gem implementation for real-time messaging and notifications. 
 ●	Full authentication and authorization using sessions and BCrypt gem in database development.
-●	Solo project on a deadline of 2 weeks. Presented project to incoming software engineering students
+
 
 
 ## Start and Install

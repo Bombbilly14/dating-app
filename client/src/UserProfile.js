@@ -10,7 +10,6 @@ function UserProfile({ me }) {
   const [connectionStatus, setConnectionStatus] = useState(null);
 
   useEffect(() => {
-    console.log(user)
     fetch(`/users/${userId}`)
       .then(res => res.json())
       .then(userData => setUser(userData));

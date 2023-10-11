@@ -33,7 +33,6 @@ function ChatPage({me}) {
 useEffect(() => {
   
     if (user.id && recipientId) {
-      console.log("hi")
       fetchMessages()
       
        const channel =  CableApp.cable.subscriptions.create(
@@ -56,7 +55,7 @@ useEffect(() => {
     }
   }, [ user, user.id, recipient_id]);
 
-
+  console.log("Channel Name:", channel_name);
 
 
 
@@ -81,24 +80,28 @@ const handleSubmit = async (e) => {
 };
    
 
-    useEffect(() => {
+useEffect(() => {
+  setIsLoading(true);
+  fetch(`/connections?sender_id=${me.id}&accepted=true`)
+      .then((res) => res.json())
+      .then((data) => {
+        const userConnections = data.filter(connection => connection.sender_id === me.id || connection.recipient_id === me.id);
+        setMatches(userConnections);
+        setIsLoading(false)
+      });
+}, []);
 
-      setIsLoading(true);
-        fetch("/users")
-          .then((res) => res.json())
-          .then((data) => {
+const handleUserClick = (id) => {
+  const selectedUser = matches.find(user => user.id === id);
+  
+  if (selectedUser) {
+    const isSender = selectedUser.sender_id === me.id;
+    setRecipientId(isSender ? selectedUser.recipient_id : selectedUser.sender_id);
+    setCurrentUser(selectedUser);
+  }
+};
 
-            setMatches(data);
-            setIsLoading(false)
-          });
-      }, []);
 
-      const handleUserClick = (id) => {
-        const selectedUser = matches.find(user => user.id === id);
-        setRecipientId(id);
-        setCurrentUser(selectedUser);
-      };
-      
 
 
       return (

@@ -3,7 +3,7 @@
   height: 100vh;
   background-color: purple;
   background-image: linear-gradient(rgb(153, 0, 94), rgb(39, 0, 39));
-  
+  overflow: auto;
  
 }
 

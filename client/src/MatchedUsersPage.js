@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MatchedCards from './MatchedCards.js'
 import RequestedMatch from './RequestedMatch.js';
-import './styles/Home.css'
+import './styles/MatchedUsers.css'
 function MatchedUsersPage({ me }) {
   const [connections, setUserConnections] = useState([])
   const [receivedConnections, setReceivedConnections] = useState([])
@@ -31,6 +31,7 @@ function MatchedUsersPage({ me }) {
         setUserConnections(userConnections);
       });
   }, [me.id, acceptedConnectionId]);
+  
 
   const users = connections.filter(connection => connection.accepted === true).map((connection, index) => {
     return (
@@ -38,12 +39,22 @@ function MatchedUsersPage({ me }) {
     );
   });
   return (
+    <>
+    <div className='pending-connections-header'>
+        {receivedConnections.length > 0 ? (
+          <h2>Pending connections</h2>
+        ) : (
+          <h4>No pending connections. Check back later for sent connections.</h4>
+        )}
+      </div>
     <div className='pending-card'>
         {pendingConnections}
-      <div className='card-container'>
+    </div>
+    < hr className='separator' />
+      <div className='matched-container'>
         {users}
       </div>
-    </div>
+    </>
   )
 }
 
