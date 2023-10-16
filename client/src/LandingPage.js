@@ -7,7 +7,7 @@ import Footer from './Footer';
 import SignIn from './SignIn';
 import RegistrationForm from './RegistrationForm';
 import { CSSTransition } from 'react-transition-group';
-import logonobackground from './images/logonobackground.png';
+
 
 const LandingPage = ({ user, setUser }) => {
   const [loggedIn, setLoggedIn] = useState(false);

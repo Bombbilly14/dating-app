@@ -162,9 +162,10 @@ function MyProfile({ user, setUser }) {
               {editing ? (
                 <>
                   <MDBCardText className="lead fw-normal mb-0" style={{ marginLeft: '10px' }} >Edit profile</MDBCardText>
-                  <form onSubmit={handleSubmit} style={{ marginLeft: '10px' }}>
-                    <label htmlFor="bio"></label>
+                  <form onSubmit={handleSubmit} style={{ marginLeft: '10px', marginBottom: '10px' }}>
+                    <label htmlFor="bio" ></label>
                     <input
+                      style={{ marginBottom: '10px' }}
                       id="bio"
                       value={bio}
                       onChange={e => setBio(e.target.value)}
@@ -172,6 +173,7 @@ function MyProfile({ user, setUser }) {
                     <br />
                     <label htmlFor="location"></label>
                     <input
+                      style={{ marginBottom: '10px' }}
                       id="location"
                       value={location}
                       onChange={e => setLocation(e.target.value)}

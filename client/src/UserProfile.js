@@ -3,55 +3,26 @@ import { useParams } from "react-router-dom";
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography } from 'mdb-react-ui-kit';
 
 
-function UserProfile({ me }) {
+function UserProfile({ me, handleClick, setShowMatchMessage, showMatchMessage }) {
 
   const [user, setUser] = useState();
   const { userId } = useParams();
+  const [matchRequestSent, setMatchRequestSent] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState(null);
 
   useEffect(() => {
     fetch(`/users/${userId}`)
       .then(res => res.json())
       .then(userData => setUser(userData));
-  }, [userId, user]);
+  }, [userId]);
 
 
-  const handleClick = (user) => {
-    fetch("/connections", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        sender_id: me.id,
-        recipient_id: user.id
-      })
-    })
-      .then(response => {
-        if (!response.ok) {
-          setConnectionStatus('repeated')
-          setTimeout(() => {
-            setConnectionStatus(null);
-          }, 4000);
-          throw new Error("Failed to create connection")
 
-        }
-        return response.json();
-      })
-      .then(connection => {
-        console.log("Connection created:", connection);
-        setConnectionStatus(connection && connection.accepted === true ? 'true' : 'null');
-
-        setTimeout(() => {
-          setConnectionStatus(null);
-        }, 4000);
-
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const handleMatchClick = () => {
+    setShowMatchMessage(true);
+    handleClick(user);
+    setMatchRequestSent(true);
   };
-
 
   return (
     <div>
@@ -62,7 +33,7 @@ function UserProfile({ me }) {
               <MDBCard>
                 <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#2A0419', height: '200px' }}>
                   <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                    <button onClick={() => handleClick(user)}>Match with user</button>
+                   
                     <MDBCardImage src={user.avatar.img} alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid="true" style={{ width: '150px', zIndex: '1' }} />
 
                   </div>
@@ -90,8 +61,13 @@ function UserProfile({ me }) {
                       <MDBCardText className="font-italic mb-0">{user.name} is {user.age} years old</MDBCardText>
                       <MDBCardText className="font-italic mb-0">{user.gender}</MDBCardText>
                     </div>
+                    
                   </div>
                   <div className="d-flex justify-content-between align-items-center mb-4">
+                  {!matchRequestSent && !showMatchMessage && (
+                    <button onClick={handleMatchClick}>Match with user</button>
+                  )}
+                  {showMatchMessage && <div className="match-message">Match request sent!</div>}
                     {connectionStatus === 'null' &&
                       <div className="alert alert-info" role="alert">
                         You have sent a request to match.
