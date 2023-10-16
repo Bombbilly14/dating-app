@@ -7,12 +7,7 @@ export const navData = [
         text: <span style={{ fontWeight: 'bold', color: 'white'}}>BROWSE</span>,
         link: "/home"
     },
-    // {
-    //     id: 0,
-    //     // icon: <AccountCircleIcon/>,
-    //     text: <span style={{ fontWeight: 'bold'}}>PROFILE</span>,
-    //     link: "/profile"
-    // },
+
     {
         id: 1,
         // icon: <MessageIcon/>,
@@ -40,7 +35,7 @@ export const profileData = [
         id: 1,
 
         text: <span style={{ fontWeight: 'bold'}}>Logout</span>,
-        link: "/signin"
+        link: "/logout"
     },
 
 ]

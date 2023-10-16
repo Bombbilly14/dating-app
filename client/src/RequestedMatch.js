@@ -66,7 +66,9 @@ function RequestedMatch({connection, me, receivedConnections, setReceivedConnect
           size='mini'
           src={user.avatar_url}
         />
+        
         <Card.Header>{user.name}</Card.Header>
+        
         <Card.Meta>{user.age}</Card.Meta>
         <Card.Description>
           {user.name} wants to connect!

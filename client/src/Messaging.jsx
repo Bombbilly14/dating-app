@@ -40,6 +40,8 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
  
     }
   }, [isLoading]);
+
+
  
   return (
     <MDBContainer fluid="true" className="gradient-custom messaging-container" style={{ maxWidth: '75%', marginTop: 5 }}>
@@ -48,6 +50,7 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
           <div className="mask-custom">
             <div className='avatar-body'>
               <MDBTypography listUnStyled className="mb-0">
+                
               {otherUsers.map((match) => {
                   const userMatch = match.recipient.id === me.id ? match.sender : match.recipient;
                   return (

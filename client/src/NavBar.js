@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 
 import DiamondIcon from '@mui/icons-material/Diamond';
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
 import logonobackground from './images/logonobackground.png';
@@ -21,7 +21,7 @@ import logonobackground from './images/logonobackground.png';
 
 
 
-export default function NavBar({me}) {
+export default function NavBar({me, logout}) {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -47,8 +47,9 @@ export default function NavBar({me}) {
 
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-          <img className={styles['nav-logo']} alt='logo' src={logonobackground}/>
-        
+          
+            <img className={styles['nav-logo']} alt='logo' src={logonobackground}/>
+          
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -138,6 +139,14 @@ export default function NavBar({me}) {
               onClose={handleCloseUserMenu}
             >
               {profileData.map(item =>{
+                if (item.link === "/logout") {
+                  return (
+                    <div key={item.id} className={styles.sideitem} onClick={logout}>
+                      {item.icon}
+                      <span className={styles.linkText}>{item.text}</span>
+                    </div>
+                  );
+                }
             return <NavLink key={item.id} className={styles.sideitem} to={item.link}>
               {item.icon}
               <span className={styles.linkText}>{item.text}</span>
