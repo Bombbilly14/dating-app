@@ -12,11 +12,11 @@ function Home({ me, handleClick, isLoading, otherUsers, connectionStatus, setSho
 
   
   const applyFilters = () => {
-    const filteredData = otherUsers.filter((user) => {
+    const filteredData = otherUsers?.filter((user) => {
       const userAge = parseInt(user.age, 10);
       const minAgeFilter = minAge ? userAge >= parseInt(minAge, 10) : true;
       const maxAgeFilter = maxAge ? userAge <= parseInt(maxAge, 10) : true;
-      const locationMatch = user.location.toLowerCase().includes(locationFilter.toLowerCase());
+      const locationMatch = user.location?.toLowerCase().includes(locationFilter.toLowerCase());
       const nameMatch = user.name.toLowerCase().includes(nameFilter.toLowerCase());
       return minAgeFilter && maxAgeFilter && locationMatch && nameMatch;
     });
@@ -53,6 +53,11 @@ function Home({ me, handleClick, isLoading, otherUsers, connectionStatus, setSho
             placeholder="Min Age"
             value={minAge}
             onChange={(e) => setMinAge(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                applyFilters();
+              }
+            }}
           />
           <input
             type="text"
@@ -60,12 +65,17 @@ function Home({ me, handleClick, isLoading, otherUsers, connectionStatus, setSho
             placeholder="Max Age"
             value={maxAge}
             onChange={(e) => setMaxAge(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                applyFilters();
+              }
+            }}
           />
           <input
             placeholder="Filter by location"
             value={locationFilter}
             onChange={(e) => setLocationFilter(e.target.value)}
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 applyFilters();
               }
@@ -75,7 +85,7 @@ function Home({ me, handleClick, isLoading, otherUsers, connectionStatus, setSho
             placeholder="Filter by name"
             value={nameFilter}
             onChange={(e) => setNameFilter(e.target.value)}
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 applyFilters();
               }
@@ -86,7 +96,7 @@ function Home({ me, handleClick, isLoading, otherUsers, connectionStatus, setSho
           <hr className='separator' />
         </div>
         <div className="card-container">
-        {filteredUsers.map((filteredUser, index) => (
+        {filteredUsers?.map((filteredUser, index) => (
           <CardComponent
             key={index}
             user={filteredUser}

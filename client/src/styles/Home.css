@@ -71,3 +71,41 @@
   
 
 }
+
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-section input[type="text, numeric"] {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+}
+
+.filter-section button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #b802b8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-section button:hover {
+  background-color: #76017a;
+}
+
+.separator {
+  width: 100%;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+}
+

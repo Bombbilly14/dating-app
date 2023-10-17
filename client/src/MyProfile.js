@@ -7,9 +7,9 @@ import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCar
 
 function MyProfile({ user, setUser }) {
   const [editing, setEditing] = useState(false);
-  const [bio, setBio] = useState("")
-  const [location, setLocation] = useState("")
-  const [age, setAge] = useState("")
+  const [bio, setBio] = useState(user.bio || "")
+  const [location, setLocation] = useState(user.location)
+  const [age, setAge] = useState(user.age || "")
   const [avatarData, setAvatarData] = useState("")
   const [editingAvatar, setEditingAvatar] = useState(false)
 

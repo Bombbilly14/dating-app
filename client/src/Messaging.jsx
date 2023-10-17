@@ -14,12 +14,12 @@ import moment from 'moment';
 function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messages, handleSubmit }) {
 
   const messagesEndRef = useRef(null);
+  // use to go to newest message i.e <span> element  by referencing useRef on said element
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const otherUsers = matches
-    // .filter(user => user.id !== me.id)
     .sort((a, b) => {
       const aLastMessageTime = a.sent_messages.length > 0
         ? new Date(a.sent_messages[a.sent_messages.length - 1].created_at).getTime()
@@ -35,7 +35,6 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
 
   useEffect(() => {
     if (!isLoading && otherUsers.length > 0) {
-      // Trigger a click on the most recent user
       handleUserClick(otherUsers[0].id);
  
     }
@@ -117,10 +116,6 @@ function Messaging({ currentUser, isLoading, matches, handleUserClick, me, messa
                     ? senderMatch.sender.avatar_url
                     : senderMatch.recipient.avatar_url;
 
-
-
-                // const user = message.sender_id === me.id ? "You" :
-                //   message.sender_id === recipient.id ? recipientName : senderName;
                 return (
                   <li key={message.id} className={message.sender_id === me.id ? "my-message" : "other-message"}>
                     {message.sender_id !== me.id && (
