@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 
 import DiamondIcon from '@mui/icons-material/Diamond';
-import { NavLink, Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { navData, profileData } from "./NavData.js";
 import styles from "./styles/navbar.module.css"
 import logonobackground from './images/logonobackground.png';

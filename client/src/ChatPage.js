@@ -55,7 +55,7 @@ function ChatPage({ me }) {
     }
   }, [user, user.id, recipient_id]);
 
-  console.log("Channel Name:", channel_name);
+
 
 
 

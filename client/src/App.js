@@ -18,7 +18,7 @@ function App({cable}) {
   const [otherUsers, setOtherUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [connectionStatus, setConnectionStatus] = useState(null);
-  const [me, setMe] = useState(null)
+  const [me, setMe] = useState("")
   const [showMatchMessage, setShowMatchMessage] = useState(false);
 
 
@@ -101,6 +101,7 @@ function App({cable}) {
         setMe(null);
       });
   };
+
 
  return (
   <div className="app-container">

@@ -5,11 +5,6 @@ import './styles/Home.css';
 
 function CardComponent({ user, handleClick, showMatchMessage, setShowMatchMessage }) {
  
-  console.log(showMatchMessage)
-  // const handleDislikeClick = () => {
-  //   handleInterest(user, false);
-  // };
-
   const handleMatchClick = () => {
     setShowMatchMessage(true);
     handleClick(user);
